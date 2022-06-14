@@ -6,9 +6,10 @@ const Sidebar = () => {
     <div className='sidebar'>
       <div className="top">
         <span className="logo">
-          遠足易
+          topic
         </span>
       </div>
+      <hr />
       <div className="center">
         <ul>
           <li>
