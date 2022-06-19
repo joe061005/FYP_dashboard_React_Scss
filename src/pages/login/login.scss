@@ -1,0 +1,112 @@
+.loginBackground {
+    background-image: url("https://images.pexels.com/photos/1525041/pexels-photo-1525041.jpeg");
+    min-height: 100vh;
+    min-width: 100vw;
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 0.9;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .logo {
+        width: 40%;
+    }
+
+    .loginFormContainer {
+        min-width: 40%;
+        background-color: white;
+        border-radius: 15px;
+        margin-bottom: 80px;
+        padding-top: 50px;
+        padding-bottom: 50px;
+
+        .formContainer {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+
+            .title {
+                align-self: center;
+
+                .titleText {
+                    font-size: 30px;
+                    font-style: italic;
+                    font-family: Bradley Hand;
+
+                }
+            }
+
+            .input {
+                margin-top: 20px;
+
+                p {
+                    font-size: 15px;
+                    color: #a8a7a3;
+                }
+
+                .inputField {
+                    display: flex;
+                    width: 100%;
+                    height: 30px;
+                    border: 1px solid #a8a7a3;
+                    border-radius: 5px;
+                    margin-top: 5px;
+
+
+                    .inputContainer {
+                        width: 83%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+
+                        input {
+                            border: none;
+                            outline: none;
+                            cursor: pointer;
+                            height: 25px;
+                            width: 90%;
+                        }
+
+                    }
+
+                    .iconContainer {
+                        width: 15%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        background-color: #82f0ff;
+
+                        .icon {
+                            font-size: 25px;
+                        }
+                    }
+                }
+            }
+
+            .loginButton {
+                margin-top: 30px;
+                align-self: center;
+
+                .btn {
+                    cursor: pointer;
+                    display: inline-block;
+                    background-color: #82f0ff;
+                    border: 0.5px solid black;
+                    border-radius: 5px;
+                    min-width: 150px;
+                    min-height: 30px;
+                }
+
+            }
+
+        }
+
+
+    }
+
+
+
+
+}

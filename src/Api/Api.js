@@ -1,11 +1,11 @@
-import AsyncStorage from '@react-native-async-storage/async-storage'
-import moment from 'moment'
+//import AsyncStorage from '@react-native-async-storage/async-storage'
+//import moment from 'moment'
 
 const api_path = {
     baseURL: 'https://abca-223-19-143-35.ngrok.io/'
 }
 
-let date = moment().format('YYYY-MM-DD');
+//let date = moment().format('YYYY-MM-DD');
 
 var storage = {
     login_data: {},
@@ -17,12 +17,14 @@ var api = {
     // Login Page
     login: (props) => {
         var request = {
-            method: 'user/login',
+            method: 'admin/adminLogin',
             params: props
         }
 
         return post(request)
     },
+
+    /*
     resetUserData: async () => {
         storage.login_data = null;
         storage.cookie = null;
@@ -34,6 +36,7 @@ var api = {
             console.log("error", error)
         }
     },
+    */
 
 
 }
