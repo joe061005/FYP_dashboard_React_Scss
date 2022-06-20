@@ -9,9 +9,10 @@ import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutline
 import ListOutlinedIcon from '@mui/icons-material/ListOutlined';
 import user from '../../asset/user.png'
 
-const Navbar = () => {
+const Navbar = (props) => {
   return (
     <div className="navbar">
+      
       <div className="wrapper">
         <div className="search">
           <input type="text" placeholder='Search...'/>
@@ -43,6 +44,7 @@ const Navbar = () => {
               alt=''
               className='avatar'
             />
+           <p>{props.user.username}</p> 
           </div>
 
         </div>

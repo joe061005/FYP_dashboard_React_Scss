@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useContext} from 'react'
 import './sidebar.scss'
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
@@ -9,8 +9,28 @@ import GroupOutlinedIcon from '@mui/icons-material/GroupOutlined';
 import MyLocationOutlinedIcon from '@mui/icons-material/MyLocationOutlined';
 import CookieOutlinedIcon from '@mui/icons-material/CookieOutlined';
 import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
+import API from '../../Api/Api.js'
+import { useNavigate } from 'react-router-dom';
+import {UserContext} from '../../pages/home/Home'
 
 const Sidebar = () => {
+
+  const navigate = useNavigate();
+  const {setIsLogout, setShowAlert} = useContext(UserContext)
+  
+
+  const logout = async () => {
+    setIsLogout(true)
+    await API.logout().then(async ([code, data, header]) => {
+      if (code == '200') {
+        navigate("/", {replace: true})
+      }else {
+        setIsLogout(false)
+        setShowAlert(true)
+      }
+    })
+  }
+
   return (
     <div className='sidebar'>
       <div className="top">
@@ -56,7 +76,7 @@ const Sidebar = () => {
             <span>Sessions</span>
           </li>
           <p className="title">USER</p>
-          <li>
+          <li onClick={() => { logout()}}>
             <ExitToAppOutlinedIcon className='icon'/>
             <span>Logout</span>
           </li>
@@ -74,7 +94,6 @@ const Sidebar = () => {
           
         </div>
       </div>
-
     </div>
   )
 }

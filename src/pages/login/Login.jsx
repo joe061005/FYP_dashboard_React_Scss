@@ -8,8 +8,11 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import API from "../../Api/Api.js"
 import ReactJsAlert from "reactjs-alert"
 import ReactLoading from 'react-loading';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+
+  const navigate = useNavigate();
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -30,39 +33,26 @@ const Login = () => {
 
     setIsLoadingLogin(true)
 
-    console.log("OK")
-
-    /*
-    this.setState({ validInput: true, approvedInput: true });
 
     const params = {
-      username: this.state.user_name,
-      password: this.state.password
+      username: username,
+      password: password
     }
 
-    this.setState({ loginSpinner: !this.state.loginSpinner })
+    console.log(params)
 
     API.login(params).then(([code, data, header]) => {
       if (code == '401') {
-        this.setState({ validInput: false })
-        this.setState({ loginSpinner: !this.state.loginSpinner })
+        setIsLoadingLogin(false)
+        setShowIncorrectAlert(true)
       } else if (code == '400') {
-        this.setState({ approvedInput: false })
-        this.setState({ loginSpinner: !this.state.loginSpinner })
+        setIsLoadingLogin(false)
+        setShowIncorrectAlert(true)
       } else {
-        console.log("header", header)
-        var set_cookies = ""
-        for (const [name, value] of header) {
-          if (name == "set-cookie") {
-            set_cookies = value
-          }
-        }
-        API.setLoginData(data, set_cookies)
-        console.log("set_cookie", set_cookies)
-        this.props.navigation.replace("intro")
+        navigate("/home", {state: {user: data}, replace: true})
       }
     })
-    */
+    
 
   }
 
@@ -73,6 +63,12 @@ const Login = () => {
         type="error"
         title="Please enter username and password!"
         Close={() => setShowEmptyAlert(false)}
+      />
+       <ReactJsAlert
+        status={showIncorrectAlert}
+        type="error"
+        title="Invalid username or password!"
+        Close={() => setShowIncorrectAlert(false)}
       />
       <img
         src={logo}

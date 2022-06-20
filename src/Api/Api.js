@@ -2,16 +2,11 @@
 //import moment from 'moment'
 
 const api_path = {
-    baseURL: 'https://abca-223-19-143-35.ngrok.io/'
+    baseURL: 'https://50d4-223-19-143-35.ngrok.io/'
 }
 
 //let date = moment().format('YYYY-MM-DD');
 
-var storage = {
-    login_data: {},
-    cookie: "",
-    cookie_ID: ""
-}
 
 var api = {
     // Login Page
@@ -19,6 +14,14 @@ var api = {
         var request = {
             method: 'admin/adminLogin',
             params: props
+        }
+
+        return post(request)
+    },
+
+    logout:  () => {
+        var request = {
+            method: 'admin/logout'
         }
 
         return post(request)
