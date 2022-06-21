@@ -5,6 +5,7 @@ import './home.scss'
 import { useLocation } from 'react-router-dom'
 import LoadingOverlay from 'react-loading-overlay';
 import ReactJsAlert from "reactjs-alert"
+import Widget from '../../components/widget/Widget'
 
 export const UserContext = createContext()
 
@@ -13,7 +14,7 @@ const Home = () => {
 
   const [isLogout, setIsLogout] = useState(false)
   const [showAlert, setShowAlert] = useState(false)
-
+ 
   return (
     <UserContext.Provider value={{ setIsLogout, setShowAlert }}>
       <LoadingOverlay
@@ -31,7 +32,12 @@ const Home = () => {
           <Sidebar />
           <div className="homeContainer">
             <Navbar user={location.state.user} />
-            home container
+            <div className="widgets">
+              <Widget type = "user"/>
+              <Widget type = "trailInfo"/>
+              <Widget type = "form"/>
+              <Widget type = "hikingGroups"/>
+            </div>
           </div>
         </div>
       </LoadingOverlay>

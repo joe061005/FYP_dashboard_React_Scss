@@ -2,6 +2,13 @@
     display: flex;
 
     .homeContainer{
-        flex: 4
+        flex: 4;
+
+        .widgets{
+            display: flex;
+            padding: 20px;
+            gap: 20px;
+
+        }
     }
 }
