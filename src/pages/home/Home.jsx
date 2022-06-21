@@ -38,6 +38,9 @@ const Home = () => {
               <Widget type = "form"/>
               <Widget type = "hikingGroups"/>
             </div>
+            <div className="charts">
+              
+            </div>
           </div>
         </div>
       </LoadingOverlay>
