@@ -6,6 +6,8 @@ import { useLocation } from 'react-router-dom'
 import LoadingOverlay from 'react-loading-overlay';
 import ReactJsAlert from "reactjs-alert"
 import Widget from '../../components/widget/Widget'
+import Featured from '../../components/featured/Featured'
+import Chart from '../../components/chart/Chart'
 
 export const UserContext = createContext()
 
@@ -39,7 +41,8 @@ const Home = () => {
               <Widget type = "hikingGroups"/>
             </div>
             <div className="charts">
-              
+              <Featured />
+              <Chart />
             </div>
           </div>
         </div>
