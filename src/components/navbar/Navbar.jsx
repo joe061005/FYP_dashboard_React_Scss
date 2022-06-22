@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import './navbar.scss'
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import LanguageOutlinedIcon from '@mui/icons-material/LanguageOutlined';
@@ -8,8 +8,12 @@ import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNone
 import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
 import ListOutlinedIcon from '@mui/icons-material/ListOutlined';
 import user from '../../asset/user.png'
+import { UserContext } from '../../context/UserContext';
 
 const Navbar = (props) => {
+
+  const {userName} = useContext(UserContext)
+
   return (
     <div className="navbar">
       
@@ -44,7 +48,7 @@ const Navbar = (props) => {
               alt=''
               className='avatar'
             />
-           <p>{props.user.username}</p> 
+           <p>{userName}</p> 
           </div>
 
         </div>

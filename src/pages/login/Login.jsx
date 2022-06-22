@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import './login.scss'
 import logo from '../../asset/logo.png'
 import PersonIcon from '@mui/icons-material/Person';
@@ -9,6 +9,7 @@ import API from "../../Api/Api.js"
 import ReactJsAlert from "reactjs-alert"
 import ReactLoading from 'react-loading';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../../context/UserContext';
 
 const Login = () => {
 
@@ -20,6 +21,8 @@ const Login = () => {
   const [showEmptyAlert, setShowEmptyAlert] = useState(false)
   const [showIncorrectAlert, setShowIncorrectAlert] = useState(false)
   const [isLoadingLogin, setIsLoadingLogin] = useState(false)
+
+  const {setUserName} = useContext(UserContext)
 
   const isValidLoginInput = () => {
     return (username && password)
@@ -49,6 +52,7 @@ const Login = () => {
         setIsLoadingLogin(false)
         setShowIncorrectAlert(true)
       } else {
+        setUserName(data.username)
         navigate("/home", {state: {user: data}, replace: true})
       }
     })

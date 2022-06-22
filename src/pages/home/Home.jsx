@@ -1,4 +1,4 @@
-import React, { useState, createContext } from 'react'
+import React, { useState, useContext} from 'react'
 import Navbar from '../../components/navbar/Navbar'
 import Sidebar from '../../components/sidebar/Sidebar'
 import './home.scss'
@@ -9,17 +9,15 @@ import Widget from '../../components/widget/Widget'
 import Featured from '../../components/featured/Featured'
 import Chart from '../../components/chart/Chart'
 import TableUI from '../../components/Table/TableUI'
+import { UserContext } from '../../context/UserContext';
 
-export const UserContext = createContext()
 
 const Home = () => {
   const location = useLocation();
 
-  const [isLogout, setIsLogout] = useState(false)
-  const [showAlert, setShowAlert] = useState(false)
+  const {setShowAlert, isLogout, showAlert} = useContext(UserContext)
  
   return (
-    <UserContext.Provider value={{ setIsLogout, setShowAlert }}>
       <LoadingOverlay
         active={isLogout}
         spinner
@@ -52,7 +50,6 @@ const Home = () => {
           </div>
         </div>
       </LoadingOverlay>
-    </UserContext.Provider >
   )
 }
 

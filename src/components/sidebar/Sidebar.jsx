@@ -11,8 +11,7 @@ import CookieOutlinedIcon from '@mui/icons-material/CookieOutlined';
 import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
 import API from '../../Api/Api.js'
 import { useNavigate } from 'react-router-dom';
-import {UserContext} from '../../pages/home/Home'
-
+import { UserContext } from '../../context/UserContext';
 const Sidebar = () => {
 
   const navigate = useNavigate();
@@ -23,6 +22,7 @@ const Sidebar = () => {
     setIsLogout(true)
     await API.logout().then(async ([code, data, header]) => {
       if (code == '200') {
+        setIsLogout(false)
         navigate("/", {replace: true})
       }else {
         setIsLogout(false)
@@ -47,7 +47,7 @@ const Sidebar = () => {
             <span>Dashboard</span>
           </li>
           <p className="title">DB INFORMATION</p>
-          <li>
+          <li onClick={() => { navigate("/users")}}>
             <PersonOutlineOutlinedIcon className='icon'/>
             <span>Users</span>
           </li>
