@@ -12,7 +12,7 @@ import { UserContext } from '../../context/UserContext';
 
 const Navbar = (props) => {
 
-  const {userName} = useContext(UserContext)
+  // const {userName} = useContext(UserContext)
 
   return (
     <div className="navbar">
@@ -48,7 +48,7 @@ const Navbar = (props) => {
               alt=''
               className='avatar'
             />
-           <p>{userName}</p> 
+           <p>{localStorage.getItem('username')}</p> 
           </div>
 
         </div>

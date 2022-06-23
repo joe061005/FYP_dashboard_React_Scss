@@ -32,7 +32,7 @@ const Home = () => {
         <div className='home'>
           <Sidebar />
           <div className="homeContainer">
-            <Navbar user={location.state.user} />
+            <Navbar/>
             <div className="widgets">
               <Widget type = "user"/>
               <Widget type = "trailInfo"/>

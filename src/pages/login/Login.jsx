@@ -22,7 +22,7 @@ const Login = () => {
   const [showIncorrectAlert, setShowIncorrectAlert] = useState(false)
   const [isLoadingLogin, setIsLoadingLogin] = useState(false)
 
-  const {setUserName} = useContext(UserContext)
+  // const {setUserName} = useContext(UserContext)
 
   const isValidLoginInput = () => {
     return (username && password)
@@ -52,7 +52,7 @@ const Login = () => {
         setIsLoadingLogin(false)
         setShowIncorrectAlert(true)
       } else {
-        setUserName(data.username)
+        localStorage.setItem('username', data.username)
         navigate("/home", {state: {user: data}, replace: true})
       }
     })
