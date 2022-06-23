@@ -34,7 +34,7 @@ const Sidebar = () => {
   return (
     <div className='sidebar'>
       <div className="top">
-        <span className="logo">
+        <span className="logo" onClick={() => { navigate("/home")}}>
           topic
         </span>
       </div>
@@ -42,7 +42,7 @@ const Sidebar = () => {
       <div className="center">
         <ul>
           <p className="title">MAIN</p>
-          <li>
+          <li onClick={() => { navigate("/home")}}>
             <DashboardIcon className='icon'/>
             <span>Dashboard</span>
           </li>
@@ -51,27 +51,27 @@ const Sidebar = () => {
             <PersonOutlineOutlinedIcon className='icon'/>
             <span>Users</span>
           </li>
-          <li>
+          <li onClick={() => { navigate("/trails")}}>
             <LandscapeOutlinedIcon className='icon'/>
             <span>Trails</span>
           </li>
-          <li>
+          <li onClick={() => { navigate("/trailInfo")}}>
             <InfoOutlinedIcon className='icon' />
             <span>Trail Information</span>
           </li>
-          <li>
+          <li onClick={() => { navigate("/forms")}}>
             <ArticleOutlinedIcon className='icon'/>
             <span>Forms</span>
           </li>
-          <li>
+          <li onClick={() => { navigate("/groups")}}>
             <GroupOutlinedIcon className='icon'/>
             <span>Hiking Groups</span>
           </li>
-          <li>
+          <li onClick={() => { navigate("/locations")}}>
             <MyLocationOutlinedIcon className='icon'/>
             <span>Locations</span>
           </li>
-          <li>
+          <li onClick={() => { navigate("/sessions")}}>
             <CookieOutlinedIcon className='icon'/>
             <span>Sessions</span>
           </li>

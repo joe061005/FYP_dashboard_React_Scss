@@ -8,6 +8,12 @@ import Login from "./pages/login/Login";
 import List from "./pages/list/List";
 import Single from "./pages/single/Single";
 import New from "./pages/new/New"
+import Trail from './pages/Trail/Trail'
+import TrailInfo from './pages/trail Info/TrailInfo'
+import Form from './pages/form/Form'
+import Group from './pages/group/Group'
+import Location from './pages/location/Location'
+import Session from './pages/session/Session'
 
 function App() {
   return (
@@ -19,8 +25,26 @@ function App() {
             <Route path = "home" element={<Home />}/>
             <Route path="users">
               <Route index element={<List />}/>
-              <Route path=":userId" element={<Single/>}/>
-              <Route path="new" element={<New />}/>
+              <Route path="addUser" element={<New />}/>
+            </Route>
+            <Route path="trails">
+              <Route index element={<Trail />}/>
+              <Route path="addTrail" element={<New />}/>
+            </Route>
+            <Route path="trailInfo">
+              <Route index element={<TrailInfo />}/>
+            </Route>
+            <Route path="forms">
+              <Route index element={<Form/>}/>
+            </Route>
+            <Route path="groups">
+              <Route index element={<Group />}/>
+            </Route>
+            <Route path="locations">
+              <Route index element={<Location />}/>
+            </Route>
+            <Route path="sessions">
+              <Route index element={<Session />}/>
             </Route>
           </Route>
         </Routes>
