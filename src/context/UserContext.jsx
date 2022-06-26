@@ -6,10 +6,11 @@ export const UserContextProvider = ({children}) => {
 
   const [isLogout, setIsLogout] = useState(false)
   const [showAlert, setShowAlert] = useState(false)
+  const [dark, setDark] = useState(false)
   // const [userName, setUserName] = useState('')
 
   return (
-    <UserContext.Provider value={{isLogout, setIsLogout, showAlert, setShowAlert}}>
+    <UserContext.Provider value={{isLogout, setIsLogout, showAlert, setShowAlert, dark, setDark}}>
         {children}
     </UserContext.Provider>
   )

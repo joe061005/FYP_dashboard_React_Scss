@@ -14,10 +14,16 @@ import Form from './pages/form/Form'
 import Group from './pages/group/Group'
 import Location from './pages/location/Location'
 import Session from './pages/session/Session'
+import "./style/dark.scss"
+import { useContext, useState } from "react";
+import {UserContext} from "./context/UserContext"
 
 function App() {
+
+  const {dark} = useContext(UserContext)
+
   return (
-    <div className="App">
+    <div className={dark? "app dark" : "app"}>
       <BrowserRouter>
         <Routes>
           <Route path="/">

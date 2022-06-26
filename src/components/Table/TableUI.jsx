@@ -26,12 +26,12 @@ const TableUI = () => {
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                     <TableRow>
-                        <TableCell>Dessert (100g serving)</TableCell>
-                        <TableCell>Calories</TableCell>
-                        <TableCell>Fat&nbsp;(g)</TableCell>
-                        <TableCell>Carbs&nbsp;(g)</TableCell>
-                        <TableCell>Protein&nbsp;(g)</TableCell>
-                        <TableCell>Status</TableCell>
+                        <TableCell className='tableCell'>Dessert (100g serving)</TableCell>
+                        <TableCell className='tableCell'>Calories</TableCell>
+                        <TableCell className='tableCell'>Fat&nbsp;(g)</TableCell>
+                        <TableCell className='tableCell'>Carbs&nbsp;(g)</TableCell>
+                        <TableCell className='tableCell'>Protein&nbsp;(g)</TableCell>
+                        <TableCell className='tableCell'>Status</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -39,14 +39,14 @@ const TableUI = () => {
                         <TableRow
                             key={row.name}
                         >
-                            <TableCell component="th" scope="row">
+                            <TableCell component="th" scope="row" className='tableCell'>
                                 {row.name}
                             </TableCell>
-                            <TableCell>{row.calories}</TableCell>
-                            <TableCell>{row.fat}</TableCell>
-                            <TableCell>{row.carbs}</TableCell>
-                            <TableCell>{row.protein}</TableCell>
-                            <TableCell>
+                            <TableCell className='tableCell'>{row.fat}</TableCell>
+                            <TableCell className='tableCell'>{row.calories}</TableCell>
+                            <TableCell className='tableCell'>{row.carbs}</TableCell>
+                            <TableCell className='tableCell'>{row.protein}</TableCell>
+                            <TableCell className='tableCell'>
                                 <span className={`status ${row.status}`}>{row.status}</span>
                             </TableCell>
                         </TableRow>

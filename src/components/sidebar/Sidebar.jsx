@@ -12,10 +12,12 @@ import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
 import API from '../../Api/Api.js'
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
+import logo from "../../asset/logo.png"
+
 const Sidebar = () => {
 
   const navigate = useNavigate();
-  const {setIsLogout, setShowAlert} = useContext(UserContext)
+  const {setIsLogout, setShowAlert, setDark} = useContext(UserContext)
   
 
   const logout = async () => {
@@ -35,7 +37,7 @@ const Sidebar = () => {
     <div className='sidebar'>
       <div className="top">
         <span className="logo" onClick={() => { navigate("/home")}}>
-          topic
+          Admin
         </span>
       </div>
       <hr />
@@ -84,8 +86,8 @@ const Sidebar = () => {
 
       </div>
       <div className="bottom">
-        <div className="colorOption"/>
-        <div className="colorOption"/>         
+        <div className="colorOption" onClick={() => {setDark(false)}}/>
+        <div className="colorOption" onClick={() => {setDark(true)}}/>         
       </div>
     </div>
   )

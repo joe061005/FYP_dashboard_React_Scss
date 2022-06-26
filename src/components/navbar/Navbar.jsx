@@ -12,7 +12,7 @@ import { UserContext } from '../../context/UserContext';
 
 const Navbar = (props) => {
 
-  // const {userName} = useContext(UserContext)
+  const {setDark} = useContext(UserContext)
 
   return (
     <div className="navbar">
@@ -27,7 +27,7 @@ const Navbar = (props) => {
             <LanguageOutlinedIcon className='logo' />
             English
           </div>
-          <div className="item">
+          <div className="item" onClick={() => {setDark(prevState => !prevState)}}>
             <DarkModeOutlinedIcon className='logo'/>
           </div>
           <div className="item">
