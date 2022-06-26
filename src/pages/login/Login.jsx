@@ -10,6 +10,7 @@ import ReactJsAlert from "reactjs-alert"
 import ReactLoading from 'react-loading';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
+import cookie from 'react-cookies'
 
 const Login = () => {
 
@@ -54,6 +55,7 @@ const Login = () => {
       } else {
         localStorage.setItem('username', data.username)
         navigate("/home", {state: {user: data}, replace: true})
+        console.log("header: ", header.get('set-cookie'))
       }
     })
     

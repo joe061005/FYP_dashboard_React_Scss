@@ -2,7 +2,7 @@
 //import moment from 'moment'
 
 const api_path = {
-    baseURL: 'https://ef1f-223-19-143-35.ngrok.io/'
+    baseURL: 'https://fa05-223-19-143-35.ngrok.io/'
 }
 
 //let date = moment().format('YYYY-MM-DD');
@@ -27,26 +27,46 @@ var api = {
         return post(request)
     },
 
-    /*
-    resetUserData: async () => {
-        storage.login_data = null;
-        storage.cookie = null;
-
-        try {
-            await AsyncStorage.removeItem('LOGIN_DATA')
-            await AsyncStorage.removeItem('COOKIE')
-        } catch (error) {
-            console.log("error", error)
+    // dashboard page
+    getUserData: () => {
+        var request = {
+            method: 'admin/userDashboard'
         }
+
+        return get(request)
     },
-    */
+
+    getInfoData: () => {
+        var request = {
+            method: 'admin/infoDashboard'
+        }
+
+        return get(request)
+    },
+
+    getFormData: () => {
+        var request = {
+            method: 'admin/formDashboard'
+        }
+
+        return get(request)
+    },
+
+    getGroupData: () => {
+        var request = {
+            method: 'admin/groupDashboard'
+        }
+
+        return get(request)
+    },
 
 
 }
 
 async function get(request) {
     return fetch(api_path.baseURL + request.method, {
-        method: 'GET'
+        method: 'GET',
+        credentials: 'include'
     }).then(response => {
         const statusCode = response.status;
         const data = response.json();
@@ -64,7 +84,9 @@ async function post(request) {
         },
         body: JSON.stringify(
             request.params
-        )
+        ),
+        credentials: 'include'
+        
     }).then(response => {
         const statusCode = response.status;
         const data = response.json();
@@ -82,7 +104,9 @@ async function put(request) {
         },
         body: JSON.stringify(
             request.params
-        )
+        ),
+        credentials: 'include'
+        
     }).then(response => {
         const statusCode = response.status;
         const data = response.json();
