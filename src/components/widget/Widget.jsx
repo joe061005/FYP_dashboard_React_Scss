@@ -14,8 +14,20 @@ const Widget = ({ type, passedData }) => {
 
 
   const processData = () => {
+
+    console.log("passed data: ", passedData)
     setTotal(passedData.length)
+
+    const yesterday = new Date()
+    yesterday.setDate(new Date().getDate() - 1)
     
+    var noOfRecordYest = passedData.filter((val) => {
+      return new Date(val) <= yesterday
+    })
+
+
+    setPercentage((passedData.length - noOfRecordYest.length)/ noOfRecordYest.length * 100)
+
   }
 
 
@@ -75,13 +87,13 @@ const Widget = ({ type, passedData }) => {
     <div className="widget">
       <div className="left">
         <span className="title">{data.title}</span>
-        <span className="counter">2123</span>
+        <span className="counter">{total}</span>
         <span className="link">{data.link}</span>
       </div>
       <div className="right">
         <div className="percentage positive">
           <KeyboardArrowUpIcon />
-          20%
+          {percentage}%
         </div>
         {data.icon}
       </div>

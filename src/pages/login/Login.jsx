@@ -43,8 +43,6 @@ const Login = () => {
       password: password
     }
 
-    console.log(params)
-
     API.login(params).then(([code, data, header]) => {
       if (code == '401') {
         setIsLoadingLogin(false)
@@ -55,7 +53,6 @@ const Login = () => {
       } else {
         localStorage.setItem('username', data.username)
         navigate("/home", {state: {user: data}, replace: true})
-        console.log("header: ", header.get('set-cookie'))
       }
     })
     
