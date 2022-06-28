@@ -2,8 +2,8 @@ import React from 'react'
 import './chart.scss'
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
-const Chart = () => {
-  const data = [
+const Chart = ({data}) => {
+  const chartData = [
     { name: "January", Total: 1200 },
     { name: "February", Total: 2100 },
     { name: "March", Total: 800 },
@@ -15,7 +15,7 @@ const Chart = () => {
     <div className="chart">
       <div className="title">Last 6 Months</div>
       <ResponsiveContainer width="100%" aspect={2 / 1}>
-        <AreaChart width={730} height={250} data={data}
+        <AreaChart width={730} height={250} data={chartData}
           margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
           <defs>
             <linearGradient id="total" x1="0" y1="0" x2="0" y2="1">

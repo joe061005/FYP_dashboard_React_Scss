@@ -26,6 +26,9 @@ const Home = () => {
   const [infoData, setInfoData] = useState([])
   const [formData, setFormData] = useState([])
   const [groupData, setGroupData] = useState([])
+  const [detailDataType, setDetailDataType] = useState('')
+  const [detailData, setDetailData] = useState([])
+
 
   const getUserData = async () => {
     await API.getUserData().then(([code, data, header]) => {
@@ -68,11 +71,56 @@ const Home = () => {
   }
 
   useEffect(() => {
-    const p = Promise.all([getUserData(), getInfoData(), getFormData(), getGroupData()])
+    Promise.all([getUserData(), getInfoData(), getFormData(), getGroupData()]).then(() => {
+      setIsLoading(false);
+      setDetailDataType('userData')
+    })
   }, [])
 
+  useEffect(() => {
+    switch (detailDataType) {
+      case 'userData':
+        setDetailData(userData)
+        break;
+
+      case 'infoData':
+        setDetailData(infoData)
+        break;
+
+      case 'formData':
+        setDetailData(formData)
+        break;
+
+      case 'groupData':
+        setDetailData(groupData)
+        break;
+    }
+  }, [detailDataType])
+
   return isLoading ? (
-    <ReactLoading type="spin" color="#82f0ff" />
+    <LoadingOverlay
+      active={isLogout}
+      spinner
+      text='Logout...'
+    >
+      <ReactJsAlert
+        status={showAlert}
+        type="error"
+        title="Please try again later!"
+        Close={() => setShowAlert(false)}
+      />
+      <div className='home'>
+        <div className="sideBarContainer">
+          <Sidebar />
+        </div>
+        <div className="homeContainer">
+          <Navbar />
+          <div className="loading">
+            <ReactLoading type="spin" color="#6439ff" />
+          </div>
+        </div>
+      </div>
+    </LoadingOverlay>
   ) : (
     <>
       <LoadingOverlay
@@ -87,22 +135,32 @@ const Home = () => {
           Close={() => setShowAlert(false)}
         />
         <div className='home'>
-          <Sidebar />
+          <div className="sideBarContainer">
+            <Sidebar />
+          </div>
           <div className="homeContainer">
             <Navbar />
             <div className="widgets">
-              <Widget type="user" passedData={userData} />
-              <Widget type="trailInfo" passedData={infoData} />
-              <Widget type="form" passedData={formData} />
-              <Widget type="hikingGroups" passedData={groupData} />
+              <div className='widgetContainer' onClick={() => { setDetailDataType('userData') }}>
+                <Widget type="user" passedData={userData} clicked={detailDataType == 'userData' ? true : false} />
+              </div>
+              <div className='widgetContainer' onClick={() => { setDetailDataType('infoData') }}>
+                <Widget type="trailInfo" passedData={infoData} clicked={detailDataType == 'infoData' ? true : false} />
+              </div>
+              <div className='widgetContainer' onClick={() => { setDetailDataType('formData') }}>
+                <Widget type="form" passedData={formData} clicked={detailDataType == 'formData' ? true : false} />
+              </div>
+              <div className='widgetContainer' onClick={() => { setDetailDataType('groupData') }}>
+                <Widget type="hikingGroups" passedData={groupData} clicked={detailDataType == 'groupData' ? true : false} />
+              </div>
             </div>
             <div className="charts">
-              <Featured />
-              <Chart />
+              <Featured data={detailData} />
+              <Chart data={detailData} />
             </div>
             <div className="listContainer">
               <div className="listTitle">Latest Tx</div>
-              <TableUI />
+              <TableUI data={detailData} />
             </div>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './featured.scss'
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { CircularProgressbar } from 'react-circular-progressbar';
@@ -6,7 +6,11 @@ import 'react-circular-progressbar/dist/styles.css'
 import KeyboardArrowUpOutlinedIcon from '@mui/icons-material/KeyboardArrowUpOutlined';
 import { KeyboardArrowDown } from '@mui/icons-material';
 
-const Featured = () => {
+const Featured = ({data}) => {
+
+  useEffect(() => {
+    console.log("passed: ", data)
+  })
   return (
     <div className="featured">
       <div className="top">

@@ -5,8 +5,9 @@ import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
 import GroupOutlinedIcon from '@mui/icons-material/GroupOutlined';
+import HorizontalRuleIcon from '@mui/icons-material/HorizontalRule';
 
-const Widget = ({ type, passedData }) => {
+const Widget = ({ type, passedData, clicked }) => {
 
   const [data, setData] = useState({})
   const [percentage, setPercentage] = useState('')
@@ -14,19 +15,17 @@ const Widget = ({ type, passedData }) => {
 
 
   const processData = () => {
-
-    console.log("passed data: ", passedData)
     setTotal(passedData.length)
 
     const yesterday = new Date()
     yesterday.setDate(new Date().getDate() - 1)
-    
+
     var noOfRecordYest = passedData.filter((val) => {
       return new Date(val) <= yesterday
     })
 
 
-    setPercentage((passedData.length - noOfRecordYest.length)/ noOfRecordYest.length * 100)
+    setPercentage((passedData.length - noOfRecordYest.length) / noOfRecordYest.length * 100)
 
   }
 
@@ -84,16 +83,16 @@ const Widget = ({ type, passedData }) => {
   }, [])
 
   return (
-    <div className="widget">
+    <div className="widget" style={{backgroundColor: clicked? '#fefff0' : 'white'}}>
       <div className="left">
         <span className="title">{data.title}</span>
         <span className="counter">{total}</span>
         <span className="link">{data.link}</span>
       </div>
       <div className="right">
-        <div className="percentage positive">
-          <KeyboardArrowUpIcon />
-          {percentage}%
+        <div className={`percentage ${percentage == 0 ? "noChange" : "positive"}`}>
+          {percentage == 0? <HorizontalRuleIcon/> : <KeyboardArrowUpIcon />}
+          {percentage != 0 &&  <p>{percentage}%</p>}
         </div>
         {data.icon}
       </div>

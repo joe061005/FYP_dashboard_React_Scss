@@ -9,28 +9,30 @@ import './list.scss'
 
 const List = () => {
 
-  const {setShowAlert, isLogout, showAlert} = useContext(UserContext)
+  const { setShowAlert, isLogout, showAlert } = useContext(UserContext)
 
   return (
-      <LoadingOverlay
-        active={isLogout}
-        spinner
-        text='Logout...'
-      >
-        <ReactJsAlert
-          status={showAlert}
-          type="error"
-          title="Please try again later!"
-          Close={() => setShowAlert(false)}
-        />
-        <div className="list">
+    <LoadingOverlay
+      active={isLogout}
+      spinner
+      text='Logout...'
+    >
+      <ReactJsAlert
+        status={showAlert}
+        type="error"
+        title="Please try again later!"
+        Close={() => setShowAlert(false)}
+      />
+      <div className="list">
+        <div className="sideBarContainer">
           <Sidebar />
-          <div className="listContainer">
-            <Navbar />
-            <DatatableUI />
-          </div>
         </div>
-      </LoadingOverlay>
+        <div className="listContainer">
+          <Navbar />
+          <DatatableUI />
+        </div>
+      </div>
+    </LoadingOverlay>
   )
 }
 

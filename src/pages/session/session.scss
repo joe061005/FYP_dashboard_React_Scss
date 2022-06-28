@@ -1,6 +1,10 @@
 .session{
     display: flex;
 
+    .sideBarContainer{
+        flex: 1
+    }
+
     .sessionContainer{
         flex: 4;
 

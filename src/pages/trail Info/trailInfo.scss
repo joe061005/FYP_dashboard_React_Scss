@@ -1,6 +1,10 @@
 .trailInfo{
     display: flex;
 
+    .sideBarContainer{
+        flex: 1
+    }
+
     .trailInfoContainer{
         flex: 4;
 

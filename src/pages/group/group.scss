@@ -1,6 +1,10 @@
 .group{
     display: flex;
 
+    .sideBarContainer{
+        flex: 1
+    }
+
     .groupContainer{
         flex: 4;
 

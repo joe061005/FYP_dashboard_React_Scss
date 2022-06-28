@@ -2,6 +2,10 @@
     display: flex;
     width: 100%;
 
+    .sideBarContainer{
+        flex: 1
+    }
+
     .newContainer {
         flex: 4;
 

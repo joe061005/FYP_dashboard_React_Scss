@@ -12,23 +12,25 @@ const TrailInfo = () => {
 
     return (
         <LoadingOverlay
-        active={isLogout}
-        spinner
-        text='Logout...'
-    >
-        <ReactJsAlert
-            status={showAlert}
-            type="error"
-            title="Please try again later!"
-            Close={() => setShowAlert(false)}
-        />
-        <div className="trailInfo">
-            <Sidebar />
-            <div className="trailInfoContainer">
-                <Navbar />
+            active={isLogout}
+            spinner
+            text='Logout...'
+        >
+            <ReactJsAlert
+                status={showAlert}
+                type="error"
+                title="Please try again later!"
+                Close={() => setShowAlert(false)}
+            />
+            <div className="trailInfo">
+                <div className="sideBarContainer">
+                    <Sidebar />
+                </div>
+                <div className="trailInfoContainer">
+                    <Navbar />
+                </div>
             </div>
-        </div>
-    </LoadingOverlay>
+        </LoadingOverlay>
     )
 }
 

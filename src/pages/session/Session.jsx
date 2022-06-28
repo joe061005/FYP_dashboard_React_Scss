@@ -9,7 +9,7 @@ import './session.scss'
 const Session = () => {
 
     const { setShowAlert, isLogout, showAlert } = useContext(UserContext)
-    
+
     return (
         <LoadingOverlay
             active={isLogout}
@@ -23,7 +23,9 @@ const Session = () => {
                 Close={() => setShowAlert(false)}
             />
             <div className="session">
-                <Sidebar />
+                <div className="sideBarContainer">
+                    <Sidebar />
+                </div>
                 <div className="sessionContainer">
                     <Navbar />
                 </div>

@@ -1,6 +1,5 @@
 .widget{
     display: flex;
-    flex: 1;
     padding: 10px;
     justify-content: space-between;
     -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
@@ -41,6 +40,10 @@
 
             &.negative{
                 color: red;
+            }
+
+            &.noChange{
+                color: gray;
             }
         }
 

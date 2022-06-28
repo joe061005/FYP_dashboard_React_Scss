@@ -22,7 +22,9 @@ const Group = () => {
                 Close={() => setShowAlert(false)}
             />
             <div className="group">
-                <Sidebar />
+                <div className="sideBarContainer">
+                    <Sidebar />
+                </div>
                 <div className="groupContainer">
                     <Navbar />
                 </div>

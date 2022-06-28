@@ -9,7 +9,7 @@ import './trail.scss'
 const Trail = () => {
 
     const { setShowAlert, isLogout, showAlert } = useContext(UserContext)
-    
+
     return (
         <LoadingOverlay
             active={isLogout}
@@ -23,7 +23,9 @@ const Trail = () => {
                 Close={() => setShowAlert(false)}
             />
             <div className="trail">
-                <Sidebar />
+                <div className="sideBarContainer">
+                    <Sidebar />
+                </div>
                 <div className="trailContainer">
                     <Navbar />
                 </div>

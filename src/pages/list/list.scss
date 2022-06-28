@@ -1,6 +1,10 @@
 .list{
     display: flex;
 
+    .sideBarContainer{
+        flex: 1
+    }
+
     .listContainer{
         flex: 4;
 

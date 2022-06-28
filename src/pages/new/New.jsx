@@ -24,7 +24,9 @@ const New = () => {
         Close={() => setShowAlert(false)}
       />
       <div className="new">
-        <Sidebar />
+        <div className="sideBarContainer">
+          <Sidebar />
+        </div>
         <div className="newContainer">
           <Navbar />
           <div className="top">
@@ -42,15 +44,15 @@ const New = () => {
               <form>
                 <div className="formInput">
                   <label>Username</label>
-                  <input type="text"  placeholder='username'/>
+                  <input type="text" placeholder='username' />
                 </div>
                 <div className="formInput">
                   <label>Email</label>
-                  <input type="email"  placeholder='your email'/>
+                  <input type="email" placeholder='your email' />
                 </div>
                 <div className="formInput">
                   <label>Password</label>
-                  <input type="password"  placeholder='your password'/>
+                  <input type="password" placeholder='your password' />
                 </div>
                 <button>Send</button>
               </form>

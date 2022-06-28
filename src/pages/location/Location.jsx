@@ -23,7 +23,9 @@ const Location = () => {
                 Close={() => setShowAlert(false)}
             />
             <div className="location">
-                <Sidebar />
+                <div className="sideBarContainer">
+                    <Sidebar />
+                </div>
                 <div className="locationContainer">
                     <Navbar />
                 </div>

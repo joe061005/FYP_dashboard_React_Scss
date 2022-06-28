@@ -20,7 +20,7 @@ const rows = [
     createData('Gingerbread', 356, 16.0, 49, 3.9 ,"Pending"),
 ];
 
-const TableUI = () => {
+const TableUI = ({data}) => {
     return (
         <TableContainer component={Paper} className='table'>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
