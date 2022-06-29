@@ -158,10 +158,12 @@ const Home = () => {
               <Featured data={detailData} />
               <Chart data={detailData} />
             </div>
+            {/*
             <div className="listContainer">
               <div className="listTitle">Latest Tx</div>
               <TableUI data={detailData} />
             </div>
+            */}
           </div>
         </div>
       </LoadingOverlay>

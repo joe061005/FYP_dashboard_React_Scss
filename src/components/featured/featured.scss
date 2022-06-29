@@ -50,7 +50,9 @@
             width: 100%;
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 20px;
 
             .item{
                 text-align: center;
@@ -63,15 +65,16 @@
                 .itemResult{
                     display: flex;
                     align-items: center;
+                    justify-content: center;
                     margin: 10px;
                     font-size: 14px;
 
                     &.positive{
                         color: green;
                     }
-        
-                    &.negative{
-                        color: red;
+
+                    &.noChange{
+                        color: gray;
                     }
                 }
             }

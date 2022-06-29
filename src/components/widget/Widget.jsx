@@ -6,6 +6,7 @@ import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
 import GroupOutlinedIcon from '@mui/icons-material/GroupOutlined';
 import HorizontalRuleIcon from '@mui/icons-material/HorizontalRule';
+import moment from 'moment';
 
 const Widget = ({ type, passedData, clicked }) => {
 
@@ -17,8 +18,7 @@ const Widget = ({ type, passedData, clicked }) => {
   const processData = () => {
     setTotal(passedData.length)
 
-    const yesterday = new Date()
-    yesterday.setDate(new Date().getDate() - 1)
+    const yesterday = moment().subtract(1,'days')
 
     var noOfRecordYest = passedData.filter((val) => {
       return new Date(val) <= yesterday
