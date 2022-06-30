@@ -122,52 +122,50 @@ const Home = () => {
       </div>
     </LoadingOverlay>
   ) : (
-    <>
-      <LoadingOverlay
-        active={isLogout}
-        spinner
-        text='Logout...'
-      >
-        <ReactJsAlert
-          status={showAlert}
-          type="error"
-          title="Please try again later!"
-          Close={() => setShowAlert(false)}
-        />
-        <div className='home'>
-          <div className="sideBarContainer">
-            <Sidebar />
+    <LoadingOverlay
+      active={isLogout}
+      spinner
+      text='Logout...'
+    >
+      <ReactJsAlert
+        status={showAlert}
+        type="error"
+        title="Please try again later!"
+        Close={() => setShowAlert(false)}
+      />
+      <div className='home'>
+        <div className="sideBarContainer">
+          <Sidebar />
+        </div>
+        <div className="homeContainer">
+          <Navbar />
+          <div className="widgets">
+            <div className='widgetContainer' onClick={() => { setDetailDataType('userData') }}>
+              <Widget type="user" passedData={userData} clicked={detailDataType == 'userData' ? true : false} />
+            </div>
+            <div className='widgetContainer' onClick={() => { setDetailDataType('infoData') }}>
+              <Widget type="trailInfo" passedData={infoData} clicked={detailDataType == 'infoData' ? true : false} />
+            </div>
+            <div className='widgetContainer' onClick={() => { setDetailDataType('formData') }}>
+              <Widget type="form" passedData={formData} clicked={detailDataType == 'formData' ? true : false} />
+            </div>
+            <div className='widgetContainer' onClick={() => { setDetailDataType('groupData') }}>
+              <Widget type="hikingGroups" passedData={groupData} clicked={detailDataType == 'groupData' ? true : false} />
+            </div>
           </div>
-          <div className="homeContainer">
-            <Navbar />
-            <div className="widgets">
-              <div className='widgetContainer' onClick={() => { setDetailDataType('userData') }}>
-                <Widget type="user" passedData={userData} clicked={detailDataType == 'userData' ? true : false} />
-              </div>
-              <div className='widgetContainer' onClick={() => { setDetailDataType('infoData') }}>
-                <Widget type="trailInfo" passedData={infoData} clicked={detailDataType == 'infoData' ? true : false} />
-              </div>
-              <div className='widgetContainer' onClick={() => { setDetailDataType('formData') }}>
-                <Widget type="form" passedData={formData} clicked={detailDataType == 'formData' ? true : false} />
-              </div>
-              <div className='widgetContainer' onClick={() => { setDetailDataType('groupData') }}>
-                <Widget type="hikingGroups" passedData={groupData} clicked={detailDataType == 'groupData' ? true : false} />
-              </div>
-            </div>
-            <div className="charts">
-              <Featured data={detailData} />
-              <Chart data={detailData} />
-            </div>
-            {/*
+          <div className="charts">
+            <Featured data={detailData} />
+            <Chart data={detailData} />
+          </div>
+          {/*
             <div className="listContainer">
               <div className="listTitle">Latest Tx</div>
               <TableUI data={detailData} />
             </div>
             */}
-          </div>
         </div>
-      </LoadingOverlay>
-    </>
+      </div>
+    </LoadingOverlay>
   )
 }
 

@@ -1,11 +1,10 @@
 import React from 'react'
 import './datatable.scss'
 import { DataGrid } from '@mui/x-data-grid';
-import { userColumns, userRows } from '../../datatablesource';
+import { userColumns} from '../../datatablesource';
 import { useNavigate } from 'react-router-dom';
-import TablePagination from '@mui/material/TablePagination';
 
-const DatatableUI = () => {
+const DatatableUI = ({data}) => {
 
     const navigate = useNavigate();
 
@@ -37,11 +36,13 @@ const DatatableUI = () => {
             </div>
             <DataGrid
                 className="datagrid"
-                rows={userRows}
+                rows={data}
                 columns={userColumns.concat(actionColumn)}
-                rowsPerPageOptions={[10, 20, 30]}
+                getRowId = {(row) => row._id}
                 checkboxSelection
-                autoPageSize
+                pageSize={10}
+                rowsPerPageOptions={[10]}
+                pagination
             />
 
         </div>

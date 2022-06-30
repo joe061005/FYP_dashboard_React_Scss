@@ -2,7 +2,7 @@
 //import moment from 'moment'
 
 const api_path = {
-    baseURL: 'https://93f6-223-19-143-35.ngrok.io/'
+    baseURL: 'https://d210-223-19-143-35.ngrok.io/'
 }
 
 //let date = moment().format('YYYY-MM-DD');
@@ -59,6 +59,15 @@ var api = {
 
         return get(request)
     },
+
+    // user page
+    getAllUser: () => {
+        var request = {
+            method: 'admin/getAllUser'
+        }
+
+        return get(request)
+    }
 
 
 }
