@@ -25,7 +25,7 @@ const Widget = ({ type, passedData, clicked }) => {
     })
 
 
-    setPercentage((passedData.length - noOfRecordYest.length) / noOfRecordYest.length * 100)
+    setPercentage(Math.round((passedData.length - noOfRecordYest.length) / noOfRecordYest.length * 100))
 
   }
 

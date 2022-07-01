@@ -6,8 +6,9 @@ import LoadingOverlay from 'react-loading-overlay';
 import ReactJsAlert from "reactjs-alert"
 import { UserContext } from '../../context/UserContext';
 import './list.scss'
-import API, { getUserData } from '../../Api/Api'
+import API from '../../Api/Api'
 import ReactLoading from 'react-loading';
+import momentTz from 'moment-timezone'
 
 const List = () => {
 
@@ -16,10 +17,10 @@ const List = () => {
   const [userData, setUserData] = useState([])
   const [isLoading, setIsLoading] = useState(true)
 
-  const getUserData = () => {
-    API.getAllUser().then(([code, data, header]) => {
-      if (code == '401') {
-        console.log('error')
+  const getUserData = async () => {
+    await API.getAllUser().then(([code, data, header]) => {
+      if (code == '401' || code == '500') {
+        console.log(data)
       } else if (code == '200') {
         setUserData(data)
         setIsLoading(false)

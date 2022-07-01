@@ -27,6 +27,7 @@ const Sidebar = () => {
         setIsLogout(false)
         navigate("/", {replace: true})
       }else {
+        console.log(data)
         setIsLogout(false)
         setShowAlert(true)
       }

@@ -42,7 +42,7 @@ const Featured = ({ data }) => {
 
     setTodayNumber(data.length - noOfRecordYest.length)
 
-    setPercentage((data.length - noOfRecordYest.length) / noOfRecordYest.length * 100)
+    setPercentage(Math.round((data.length - noOfRecordYest.length) / noOfRecordYest.length * 100))
 
     setlastWeekNumber(data.length - noOfRecordLastWeek.length)
 

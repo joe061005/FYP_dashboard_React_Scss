@@ -2,7 +2,7 @@
 //import moment from 'moment'
 
 const api_path = {
-    baseURL: 'https://d210-223-19-143-35.ngrok.io/'
+    baseURL: 'https://2e35-223-19-143-35.ngrok.io/'
 }
 
 //let date = moment().format('YYYY-MM-DD');
@@ -67,6 +67,33 @@ var api = {
         }
 
         return get(request)
+    },
+
+    deleteUsers: (props) => {
+        var request = {
+            method: 'admin/deleteUsers',
+            params: props
+        }
+
+        return post(request)
+    },
+
+    // session page
+    getAllSession: () => {
+        var request = {
+            method: 'admin/getAllSession'
+        }
+
+        return get(request)
+    },
+
+    deleteSessions: (props) => {
+        var request = {
+            method: 'admin/deleteSessions',
+            params: props
+        }
+
+        return post(request)
     }
 
 
@@ -123,5 +150,6 @@ async function put(request) {
         return Promise.all([statusCode, data, header]);
     })
 }
+
 
 module.exports = api;

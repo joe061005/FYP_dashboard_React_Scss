@@ -43,14 +43,11 @@ const Login = () => {
       password: password
     }
 
-    API.login(params).then(([code, data, header]) => {
-      if (code == '401') {
+    await API.login(params).then(([code, data, header]) => {
+      if (code == '401' || code == '500') {
         setIsLoadingLogin(false)
         setShowIncorrectAlert(true)
-      } else if (code == '400') {
-        setIsLoadingLogin(false)
-        setShowIncorrectAlert(true)
-      } else {
+      } else if (code == '200'){
         localStorage.setItem('username', data.username)
         navigate("/home", {state: {user: data}, replace: true})
       }

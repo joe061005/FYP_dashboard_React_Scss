@@ -1,16 +1,61 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import Navbar from '../../components/navbar/Navbar'
 import Sidebar from '../../components/sidebar/Sidebar'
 import LoadingOverlay from 'react-loading-overlay';
 import ReactJsAlert from "reactjs-alert"
 import { UserContext } from '../../context/UserContext';
 import './session.scss'
+import SessionDT from '../../components/sessionDT/SessionDT'
+import API from '../../Api/Api'
+import ReactLoading from 'react-loading';
 
 const Session = () => {
 
     const { setShowAlert, isLogout, showAlert } = useContext(UserContext)
 
-    return (
+    const [sessionData, setSessionData] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
+
+    const getSessionData = async () =>{
+        await API.getAllSession().then(([code, data, header]) => {
+            if (code == '401' || code == '500') {
+                console.log(data)
+              } else if (code == '200') {
+                setSessionData(data)
+                setIsLoading(false)
+              }
+        })
+    }
+
+    useEffect(() => {
+        getSessionData()
+    }, [])
+
+    return isLoading ? (
+        <LoadingOverlay
+          active={isLogout}
+          spinner
+          text='Logout...'
+        >
+          <ReactJsAlert
+            status={showAlert}
+            type="error"
+            title="Please try again later!"
+            Close={() => setShowAlert(false)}
+          />
+          <div className='session'>
+            <div className="sideBarContainer">
+              <Sidebar />
+            </div>
+            <div className="sessionContainer">
+              <Navbar />
+              <div className="loading">
+                <ReactLoading type="spin" color="#6439ff" />
+              </div>
+            </div>
+          </div>
+        </LoadingOverlay>
+      ) : (
         <LoadingOverlay
             active={isLogout}
             spinner
@@ -28,6 +73,7 @@ const Session = () => {
                 </div>
                 <div className="sessionContainer">
                     <Navbar />
+                    <SessionDT data={sessionData}/>
                 </div>
             </div>
         </LoadingOverlay>

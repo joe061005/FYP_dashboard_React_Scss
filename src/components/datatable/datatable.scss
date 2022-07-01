@@ -1,6 +1,7 @@
 .datatable {
     height: 650px;
     padding: 20px;
+    padding-bottom: 60px;
 
     .datatableTitle {
         width: 100%;
@@ -10,6 +11,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        margin-bottom: 20px;
 
         .link {
             text-decoration: none;
@@ -23,7 +25,30 @@
         }
     }
 
-    .confirmedText, .numText {
+    .deleteSelectedButtonContainer {
+        margin-bottom: 10px;
+        width: 90px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        background-color: #de4949;
+        border-radius: 5px;
+        cursor: pointer;
+
+        .deleteButton {
+           color: white;
+        }
+
+        .deleteText{
+            font-size: 15px;
+            color: white;
+        }
+    }
+
+
+    .confirmedText,
+    .numText {
         text-align: left;
         width: 100%;
     }

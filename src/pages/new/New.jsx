@@ -5,9 +5,13 @@ import LoadingOverlay from 'react-loading-overlay';
 import ReactJsAlert from "reactjs-alert"
 import { UserContext } from '../../context/UserContext';
 import './new.scss'
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import { useNavigate } from 'react-router-dom';
 
 
 const New = () => {
+
+  const navigate = useNavigate();
 
   const { setShowAlert, isLogout, showAlert } = useContext(UserContext)
 
@@ -30,6 +34,10 @@ const New = () => {
         <div className="newContainer">
           <Navbar />
           <div className="top">
+            <div className="goBackButton" onClick={() => {navigate(-1)}}>
+             <ArrowBackIosNewIcon />
+             <p className="goBackButtonText">Go Back</p>
+            </div>
             <h1>Add New User</h1>
           </div>
           <div className="bottom">
@@ -54,7 +62,7 @@ const New = () => {
                   <label>Password</label>
                   <input type="password" placeholder='your password' />
                 </div>
-                <button>Send</button>
+                <button>Create</button>
               </form>
             </div>
           </div>

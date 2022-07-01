@@ -32,8 +32,8 @@ const Home = () => {
 
   const getUserData = async () => {
     await API.getUserData().then(([code, data, header]) => {
-      if (code == '401') {
-        console.log('error')
+      if (code == '401' || code == '500') {
+        console.log(data)
       } else if (code == '200') {
         setUserData(data)
       }
@@ -42,8 +42,8 @@ const Home = () => {
 
   const getInfoData = async () => {
     await API.getInfoData().then(([code, data, header]) => {
-      if (code == '401') {
-        console.log('error')
+      if (code == '401' || code == '500') {
+        console.log(data)
       } else if (code == '200') {
         setInfoData(data)
       }
@@ -52,8 +52,8 @@ const Home = () => {
 
   const getFormData = async () => {
     await API.getFormData().then(([code, data, header]) => {
-      if (code == '401') {
-        console.log('error')
+      if (code == '401' || code == '500') {
+        console.log(data)
       } else if (code == '200') {
         setFormData(data)
       }
@@ -62,8 +62,8 @@ const Home = () => {
 
   const getGroupData = async () => {
     await API.getGroupData().then(([code, data, header]) => {
-      if (code == '401') {
-        console.log('error')
+      if (code == '401' || code == '500') {
+        console.log(data)
       } else if (code == '200') {
         setGroupData(data)
       }
