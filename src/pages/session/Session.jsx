@@ -8,76 +8,87 @@ import './session.scss'
 import SessionDT from '../../components/sessionDT/SessionDT'
 import API from '../../Api/Api'
 import ReactLoading from 'react-loading';
+import { useNavigationType } from 'react-router-dom'
 
 const Session = () => {
 
-    const { setShowAlert, isLogout, showAlert } = useContext(UserContext)
+  const navigationType = useNavigationType();
 
-    const [sessionData, setSessionData] = useState([])
-    const [isLoading, setIsLoading] = useState(true)
+  const { setShowAlert, isLogout, showAlert } = useContext(UserContext)
 
-    const getSessionData = async () =>{
-        await API.getAllSession().then(([code, data, header]) => {
-            if (code == '401' || code == '500') {
-                console.log(data)
-              } else if (code == '200') {
-                setSessionData(data)
-                setIsLoading(false)
-              }
-        })
+  const [sessionData, setSessionData] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [getData, setGetData] = useState(true)
+
+  const getSessionData = async () => {
+    await API.getAllSession().then(([code, data, header]) => {
+      if (code == '401' || code == '500') {
+        console.log(data)
+      } else if (code == '200') {
+        setSessionData(data)
+        localStorage.setItem('sessionData', JSON.stringify(data))
+        setIsLoading(false)
+      }
+    })
+  }
+
+  useEffect(() => {
+    console.log(navigationType)
+    if (navigationType != "POP") {
+      getSessionData()
+    }else{
+      setSessionData(JSON.parse(localStorage.getItem('sessionData')))
+      setIsLoading(false)
     }
+  }, [])
 
-    useEffect(() => {
-        getSessionData()
-    }, [])
-
-    return isLoading ? (
-        <LoadingOverlay
-          active={isLogout}
-          spinner
-          text='Logout...'
-        >
-          <ReactJsAlert
-            status={showAlert}
-            type="error"
-            title="Please try again later!"
-            Close={() => setShowAlert(false)}
-          />
-          <div className='session'>
-            <div className="sideBarContainer">
-              <Sidebar />
-            </div>
-            <div className="sessionContainer">
-              <Navbar />
-              <div className="loading">
-                <ReactLoading type="spin" color="#6439ff" />
-              </div>
-            </div>
+  return isLoading ? (
+    <LoadingOverlay
+      active={isLogout}
+      spinner
+      text='Logout...'
+    >
+      <ReactJsAlert
+        status={showAlert}
+        type="error"
+        title="Please try again later!"
+        Close={() => setShowAlert(false)}
+      />
+      <div className='session'>
+        <div className="sideBarContainer">
+          <Sidebar />
+        </div>
+        <div className="sessionContainer">
+          <Navbar />
+          <div className="loading">
+            <ReactLoading type="spin" color="#6439ff" />
           </div>
-        </LoadingOverlay>
-      ) : (
-        <LoadingOverlay
-            active={isLogout}
-            spinner
-            text='Logout...'
-        >
-            <ReactJsAlert
-                status={showAlert}
-                type="error"
-                title="Please try again later!"
-                Close={() => setShowAlert(false)}
-            />
-            <div className="session">
-                <div className="sideBarContainer">
-                    <Sidebar />
-                </div>
-                <div className="sessionContainer">
-                    <Navbar />
-                    <SessionDT data={sessionData}/>
-                </div>
-            </div>
-        </LoadingOverlay>
-    )
+        </div>
+      </div>
+    </LoadingOverlay>
+  ) : (
+    <LoadingOverlay
+      active={isLogout}
+      spinner
+      text='Logout...'
+    >
+      <ReactJsAlert
+        status={showAlert}
+        type="error"
+        title="Please try again later!"
+        Close={() => setShowAlert(false)}
+      />
+      <div className="session">
+        <div className="sideBarContainer">
+          <Sidebar />
+        </div>
+        <div className="sessionContainer">
+          <Navbar />
+          <SessionDT data={sessionData} />
+        </div>
+      </div>
+    </LoadingOverlay>
+  )
 }
 
 export default Session

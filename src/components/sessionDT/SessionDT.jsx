@@ -63,13 +63,14 @@ const DatatableUI = ({ data }) => {
                     newList = filteredData.filter((row, index) => {
                         return row._id != id
                     })
- 
+
                 } else {
                     newList = filteredData.filter((row, index) => {
                         return !selectedRows.includes(row._id)
                     })
                 }
                 setFilteredData(newList)
+                localStorage.setItem('sessionData', JSON.stringify(newList))
             }
         })
 
@@ -120,7 +121,7 @@ const DatatableUI = ({ data }) => {
             field: "action", headerName: "Action", width: 250, renderCell: (params) => {
                 return (
                     <div className="cellAction">
-                        <div className="viewButton">
+                        <div className="viewButton" onClick={(e) => { e.stopPropagation(); navigate('/sessions/sessionDetail', { state: { sessionData: params.row } }) }}>
                             View
                         </div>
                         <div className="deleteButton" onClick={(e) => { e.stopPropagation(); deleteSessionsConfirm(params.row._id) }}>

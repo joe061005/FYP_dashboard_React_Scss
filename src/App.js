@@ -17,6 +17,8 @@ import Session from './pages/session/Session'
 import "./style/dark.scss"
 import { useContext, useState } from "react";
 import {UserContext} from "./context/UserContext"
+import SessionDetail from "./pages/session/SessionDetail"
+
 
 function App() {
 
@@ -51,6 +53,7 @@ function App() {
             </Route>
             <Route path="sessions">
               <Route index element={<Session />}/>
+              <Route path= "sessionDetail"  element={<SessionDetail />}/>
             </Route>
           </Route>
         </Routes>
