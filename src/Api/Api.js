@@ -19,7 +19,7 @@ var api = {
         return post(request)
     },
 
-    logout:  () => {
+    logout: () => {
         var request = {
             method: 'admin/logout'
         }
@@ -78,6 +78,24 @@ var api = {
         return post(request)
     },
 
+    // location page
+    getAllLocation: () => {
+        var request = {
+            method: 'admin/getAllLocation'
+        }
+
+        return get(request)
+    },
+
+    deleteLocations: (props) => {
+        var request = {
+            method: 'admin/deleteLocations',
+            params: props
+        }
+
+        return post(request)
+    },
+
     // session page
     getAllSession: () => {
         var request = {
@@ -95,6 +113,7 @@ var api = {
 
         return post(request)
     }
+
 
 
 }
@@ -122,7 +141,7 @@ async function post(request) {
             request.params
         ),
         credentials: 'include'
-        
+
     }).then(response => {
         const statusCode = response.status;
         const data = response.json();
@@ -142,7 +161,7 @@ async function put(request) {
             request.params
         ),
         credentials: 'include'
-        
+
     }).then(response => {
         const statusCode = response.status;
         const data = response.json();

@@ -1,0 +1,117 @@
+.locationDetail {
+    display: flex;
+    width: 100%;
+
+    .sideBarContainer {
+        flex: 1
+    }
+
+    .newContainer {
+        flex: 4;
+
+        .top {
+            margin: 20px;
+
+            .goBackButton {
+                width: 10%;
+                padding: 10px;
+                border: none;
+                background-color: rgb(0, 225, 255);
+                color: white;
+                font-weight: bold;
+                cursor: pointer;
+                border-radius: 5px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 5px;
+            }
+        }
+
+        .bottom {
+            -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+            box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+            padding: 10px;
+            margin: 20px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            height: 80%;
+
+
+            .left {
+                flex: 1;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                img {
+                    width: 200px;
+                    height: 200px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                }
+            }
+
+            .right {
+                flex: 3;
+
+                .detailContainer {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 20px;
+
+
+                    .formInput {
+                        width: 40%;
+
+                        p {
+                            width: 100%;
+                            padding: 5px;
+                            border-bottom: 1px solid gray;
+                        }
+                    }
+
+                    .mapContainer{
+                        width: 85%;
+
+                        .mapLabel{
+                            display: block;
+                        }
+
+                        .map{
+                            border: 0;
+                            margin-top: 5px;
+                        }
+ 
+                    }
+
+                    .loading{
+                        width: 90%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        margin-top: 20px;
+
+                    }
+
+                    button {
+                        width: 80%;
+                        padding: 10px;
+                        border: none;
+                        background-color: #de4949;
+                        color: white;
+                        font-weight: bold;
+                        cursor: pointer;
+                        border-radius: 5px;
+                        margin-top: 20px;
+
+                    }
+                }
+            }
+
+        }
+    }
+
+
+}

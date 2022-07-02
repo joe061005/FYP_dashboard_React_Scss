@@ -13,7 +13,7 @@ import API from '../../Api/Api';
 import LoadingOverlay from 'react-loading-overlay';
 
 
-const SessionDT = ({ data }) => {
+const LocationDT = ({ data }) => {
 
     const navigate = useNavigate();
 
@@ -22,14 +22,14 @@ const SessionDT = ({ data }) => {
     const [showAlert, setShowAlert] = useState(false)
     const [isLoadingDelete, setIsLoadingDelete] = useState(false)
 
-    const deleteSessionsConfirm = (id) => {
+    const deleteLocationsConfirm = (id) => {
         confirmAlert({
             customUI: ({ onClose }) => {
                 return (
                     <div className='custom-ui'>
                         <h1>Are you sure?</h1>
                         <p>{`Do you want to delete the selected record(s) ${id ? `(ID: ${id})` : `(Total: ${selectedRows.length})`}`}</p>
-                        <button onClick={() => { id ? deleteSessions(id) : deleteSessions(); onClose() }}>Yes</button>
+                        <button onClick={() => { id ? deleteLocations(id) : deleteLocations(); onClose() }}>Yes</button>
                         <button onClick={() => { onClose() }}>No</button>
                     </div>
                 )
@@ -38,23 +38,25 @@ const SessionDT = ({ data }) => {
 
     }
 
-    const deleteSessions = async (id) => {
+    const deleteLocations = async (id) => {
+        console.log("deletelocations")
+
         var params;
 
         if (!id) {
             if (selectedRows.length == 0) return setShowAlert(true)
             params = {
-                sessionList: selectedRows
+                locationList: selectedRows
             }
         } else {
             params = {
-                sessionList: [id]
+                locationList: [id]
             }
         }
 
         setIsLoadingDelete(true)
 
-        await API.deleteSessions(params).then(([code, data, header]) => {
+        await API.deleteLocations(params).then(([code, data, header]) => {
             if (code == '401' || code == '500') {
                 console.log(data)
             } else if (code == '200') {
@@ -70,7 +72,7 @@ const SessionDT = ({ data }) => {
                     })
                 }
                 setFilteredData(newList)
-                localStorage.setItem('sessionData', JSON.stringify(newList))
+                localStorage.setItem('locationData', JSON.stringify(newList))
             }
         })
 
@@ -84,47 +86,65 @@ const SessionDT = ({ data }) => {
 
     const userColumns = [
         {
-            field: "activeTime",
-            headerName: "Last Active time",
-            type: 'string',
-            headerAlign: 'left',
-            width: 250,
-
-        },
-        {
-            field: "expires",
-            headerName: "Expires",
+            field: "date",
+            headerName: "Time",
             type: 'string',
             headerAlign: 'left',
             width: 250,
             renderCell: (params) => {
                 return (
-                    <p>{momentTz.tz(params.row.expires, "Asia/Hong_Kong").format("DD-MM-YYYY HH:mm:ss")}</p>
+                    <p>{momentTz.tz(params.row.date, "Asia/Hong_Kong").format("DD-MM-YYYY HH:mm:ss")}</p>
+                )
+            }
+
+        },
+        {
+            field: "groupID",
+            headerName: "Group ID",
+            type: 'string',
+            headerAlign: 'left',
+            width: 250,
+            renderCell: (params) => {
+                return (
+                    <p>{params.row.groupID ? params.row.groupID : "No group"}</p>
                 )
             }
 
         },
 
         {
-            field: "session",
+            field: "userID",
             headerName: "User ID",
             type: 'string',
             headerAlign: 'left',
             width: 250,
+        },
+
+        {
+            field: "coordinate",
+            headerName: "Coordinate (latitude, longitude)",
+            type: 'string',
+            headerAlign: 'left',
+            width: 250,
             renderCell: (params) => {
                 return (
-                    <p>{params.row.session.iden}</p>
+                    <p>{`(${params.row.coordinate.latitude}, ${params.row.coordinate.longitude})`}</p>
                 )
             }
+
         },
+
         {
-            field: "action", headerName: "Action", width: 250, renderCell: (params) => {
+            field: "action",
+            headerName: "Action",
+            width: 250,
+            renderCell: (params) => {
                 return (
                     <div className="cellAction">
-                        <div className="viewButton" onClick={(e) => { e.stopPropagation(); navigate('/sessions/sessionDetail', { state: { sessionData: params.row } }) }}>
+                        <div className="viewButton" onClick={(e) => { e.stopPropagation(); navigate('/locations/locationDetail', { state: { locationData: params.row } }) }}>
                             View
                         </div>
-                        <div className="deleteButton" onClick={(e) => { e.stopPropagation(); deleteSessionsConfirm(params.row._id) }}>
+                        <div className="deleteButton" onClick={(e) => { e.stopPropagation(); deleteLocationsConfirm(params.row._id) }}>
                             Delete
                         </div>
                     </div>
@@ -148,7 +168,7 @@ const SessionDT = ({ data }) => {
                     Close={() => setShowAlert(false)}
                 />
                 <div className="deleteSelectedButtonContainer" onClick={() => {
-                    deleteSessionsConfirm()
+                    deleteLocationsConfirm()
                 }}>
                     <DeleteIcon className='deleteButton' />
                     <p className="deleteText">Delete</p>
@@ -169,4 +189,4 @@ const SessionDT = ({ data }) => {
     )
 }
 
-export default SessionDT
+export default LocationDT

@@ -18,7 +18,6 @@ const Session = () => {
 
   const [sessionData, setSessionData] = useState([])
   const [isLoading, setIsLoading] = useState(true)
-  const [getData, setGetData] = useState(true)
 
   const getSessionData = async () => {
     await API.getAllSession().then(([code, data, header]) => {

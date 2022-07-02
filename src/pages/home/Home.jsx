@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react'
 import Navbar from '../../components/navbar/Navbar'
 import Sidebar from '../../components/sidebar/Sidebar'
 import './home.scss'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigationType } from 'react-router-dom'
 import LoadingOverlay from 'react-loading-overlay';
 import ReactJsAlert from "reactjs-alert"
 import Widget from '../../components/widget/Widget'
@@ -17,6 +17,7 @@ import ReactLoading from 'react-loading';
 
 const Home = () => {
   const location = useLocation();
+  const navigationType = useNavigationType();
 
   const { setShowAlert, isLogout, showAlert } = useContext(UserContext)
 
@@ -36,6 +37,7 @@ const Home = () => {
         console.log(data)
       } else if (code == '200') {
         setUserData(data)
+        localStorage.setItem('userDB', JSON.stringify(data))
       }
     })
   }
@@ -46,6 +48,7 @@ const Home = () => {
         console.log(data)
       } else if (code == '200') {
         setInfoData(data)
+        localStorage.setItem('infoDB', JSON.stringify(data))
       }
     })
   }
@@ -56,6 +59,7 @@ const Home = () => {
         console.log(data)
       } else if (code == '200') {
         setFormData(data)
+        localStorage.setItem('formDB', JSON.stringify(data))
       }
     })
   }
@@ -66,15 +70,25 @@ const Home = () => {
         console.log(data)
       } else if (code == '200') {
         setGroupData(data)
+        localStorage.setItem('groupDB', JSON.stringify(data))
       }
     })
   }
 
   useEffect(() => {
-    Promise.all([getUserData(), getInfoData(), getFormData(), getGroupData()]).then(() => {
+    if (navigationType != "POP") {
+      Promise.all([getUserData(), getInfoData(), getFormData(), getGroupData()]).then(() => {
+        setIsLoading(false);
+        setDetailDataType('userData')
+      })
+    }else{
+      setUserData(JSON.parse(localStorage.getItem('userDB')))
+      setInfoData(JSON.parse(localStorage.getItem('infoDB')))
+      setFormData(JSON.parse(localStorage.getItem('formDB')))
+      setGroupData(JSON.parse(localStorage.getItem('groupDB')))
       setIsLoading(false);
       setDetailDataType('userData')
-    })
+    }
   }, [])
 
   useEffect(() => {
