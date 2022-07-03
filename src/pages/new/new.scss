@@ -9,11 +9,8 @@
     .newContainer {
         flex: 4;
 
-        .top,
-        .bottom {
-            -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
-            box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
-            padding: 10px;
+        .top{
+
             margin: 20px;
             display: flex;
             gap: 20px;
@@ -41,6 +38,17 @@
                 width: 70%;
 
             }
+        }
+
+        .bottom {
+            -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+            box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+            padding: 10px;
+            margin: 20px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+
 
             .left {
                 flex: 1;
@@ -78,7 +86,7 @@
                     }
 
                     button {
-                        width: 80%;
+                        width: 85%;
                         padding: 10px;
                         border: none;
                         background-color: teal;
@@ -86,6 +94,7 @@
                         font-weight: bold;
                         cursor: pointer;
                         border-radius: 5px;
+                        margin-top: 10px;
 
                     }
                 }

@@ -4,8 +4,9 @@
     min-height: 100vh;
     background-color: white;
     position: sticky;
+    position: -webkit-sticky;
     top: 0;
-    left: 0;
+
 
     .top{
         height: 50;
