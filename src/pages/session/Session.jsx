@@ -41,6 +41,8 @@ const Session = () => {
     }
   }, [])
 
+  
+
   return isLoading ? (
     <LoadingOverlay
       active={isLogout}
