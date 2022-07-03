@@ -32,7 +32,7 @@ const List = () => {
     getUserData()
   }, [])
 
-  return isLoading ? (
+  return(
     <LoadingOverlay
       active={isLogout}
       spinner
@@ -50,31 +50,13 @@ const List = () => {
         </div>
         <div className="listContainer">
           <Navbar />
-          <div className="loading">
-            <ReactLoading type="spin" color="#6439ff" />
-          </div>
-        </div>
-      </div>
-    </LoadingOverlay>
-  ) : (
-    <LoadingOverlay
-      active={isLogout}
-      spinner
-      text='Logout...'
-    >
-      <ReactJsAlert
-        status={showAlert}
-        type="error"
-        title="Please try again later!"
-        Close={() => setShowAlert(false)}
-      />
-      <div className="list">
-        <div className="sideBarContainer">
-          <Sidebar />
-        </div>
-        <div className="listContainer">
-          <Navbar />
-          <DatatableUI data= {userData}/>
+          {isLoading ?
+            <div className="loading">
+              <ReactLoading type="spin" color="#6439ff" />
+            </div>
+            :
+            <DatatableUI data={userData} />
+          }
         </div>
       </div>
     </LoadingOverlay>

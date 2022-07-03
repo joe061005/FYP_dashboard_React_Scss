@@ -43,7 +43,7 @@ const Location = () => {
         }
     }, [])
 
-    return isLoading ? (
+    return(
         <LoadingOverlay
             active={isLogout}
             spinner
@@ -61,31 +61,13 @@ const Location = () => {
                 </div>
                 <div className="locationContainer">
                     <Navbar />
-                    <div className="loading">
-                        <ReactLoading type="spin" color="#6439ff" />
-                    </div>
-                </div>
-            </div>
-        </LoadingOverlay>
-    ) : (
-        <LoadingOverlay
-            active={isLogout}
-            spinner
-            text='Logout...'
-        >
-            <ReactJsAlert
-                status={showAlert}
-                type="error"
-                title="Please try again later!"
-                Close={() => setShowAlert(false)}
-            />
-            <div className="location">
-                <div className="sideBarContainer">
-                    <Sidebar />
-                </div>
-                <div className="locationContainer">
-                    <Navbar />
-                    <LocationDT data={locationData} />
+                    {isLoading ?
+                        <div className="loading">
+                            <ReactLoading type="spin" color="#6439ff" />
+                        </div>
+                        :
+                        <LocationDT data={locationData} />
+                    }
                 </div>
             </div>
         </LoadingOverlay>

@@ -35,15 +35,15 @@ const Session = () => {
     console.log(navigationType)
     if (navigationType != "POP") {
       getSessionData()
-    }else{
+    } else {
       setSessionData(JSON.parse(localStorage.getItem('sessionData')))
       setIsLoading(false)
     }
   }, [])
 
-  
 
-  return isLoading ? (
+
+  return(
     <LoadingOverlay
       active={isLogout}
       spinner
@@ -61,31 +61,13 @@ const Session = () => {
         </div>
         <div className="sessionContainer">
           <Navbar />
-          <div className="loading">
-            <ReactLoading type="spin" color="#6439ff" />
-          </div>
-        </div>
-      </div>
-    </LoadingOverlay>
-  ) : (
-    <LoadingOverlay
-      active={isLogout}
-      spinner
-      text='Logout...'
-    >
-      <ReactJsAlert
-        status={showAlert}
-        type="error"
-        title="Please try again later!"
-        Close={() => setShowAlert(false)}
-      />
-      <div className="session">
-        <div className="sideBarContainer">
-          <Sidebar />
-        </div>
-        <div className="sessionContainer">
-          <Navbar />
-          <SessionDT data={sessionData} />
+          {isLoading ?
+            <div className="loading">
+              <ReactLoading type="spin" color="#6439ff" />
+            </div>
+            :
+            <SessionDT data={sessionData} />
+          }
         </div>
       </div>
     </LoadingOverlay>
