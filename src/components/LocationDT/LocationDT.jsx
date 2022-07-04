@@ -137,7 +137,7 @@ const LocationDT = ({ data }) => {
         {
             field: "action",
             headerName: "Action",
-            width: 250,
+            width: 200,
             renderCell: (params) => {
                 return (
                     <div className="cellAction">

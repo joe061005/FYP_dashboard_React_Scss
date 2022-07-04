@@ -22,6 +22,10 @@ const GroupDT = ({ data }) => {
     const [showAlert, setShowAlert] = useState(false)
     const [isLoadingDelete, setIsLoadingDelete] = useState(false)
 
+    const rounding = (num) => {
+        return Math.round(num * 10) / 10
+    }
+
     const deleteGroupsConfirm = (id) => {
         confirmAlert({
             customUI: ({ onClose }) => {
@@ -86,49 +90,51 @@ const GroupDT = ({ data }) => {
 
     const userColumns = [
         {
-            field: "date",
-            headerName: "Time",
+            field: "timestamp",
+            headerName: "Creation Time",
             type: 'string',
             headerAlign: 'left',
-            width: 250,
+            width: 180,
+
+        },
+
+        {
+            field: "startTime",
+            headerName: "Start Time",
+            type: 'string',
+            headerAlign: 'left',
+            width: 120,
             renderCell: (params) => {
                 return (
-                    <p>{momentTz.tz(params.row.date, "Asia/Hong_Kong").format("DD-MM-YYYY HH:mm:ss")}</p>
+                    <p>{params.row.startTime == 0? "Morning" : params.row.startTime == 1? "Afternoon" : "Night"}</p>
+                )
+            }
+        },
+
+        {
+            field: "centroids",
+            headerName: "Centroids (Age, Experience, Difficulty, Time, View)",
+            type: 'string',
+            headerAlign: 'left',
+            width: 350,
+            renderCell: (params) => {
+                return (
+                    <p>{`(${rounding(params.row.centroids[0])}, ${rounding(params.row.centroids[1])}, ${rounding(params.row.centroids[2])}, ${rounding(params.row.centroids[3])}, ${rounding(params.row.centroids[4])})`}</p>
                 )
             }
 
         },
+
+
         {
-            field: "groupID",
-            headerName: "Group ID",
+            field: "record",
+            headerName: "Number of members (Max: 10)",
             type: 'string',
             headerAlign: 'left',
-            width: 250,
+            width: 220,
             renderCell: (params) => {
                 return (
-                    <p>{params.row.groupID ? params.row.groupID : "No group"}</p>
-                )
-            }
-
-        },
-
-        {
-            field: "userID",
-            headerName: "User ID",
-            type: 'string',
-            headerAlign: 'left',
-            width: 250,
-        },
-
-        {
-            field: "coordinate",
-            headerName: "Coordinate (latitude, longitude)",
-            type: 'string',
-            headerAlign: 'left',
-            width: 250,
-            renderCell: (params) => {
-                return (
-                    <p>{`(${params.row.coordinate.latitude}, ${params.row.coordinate.longitude})`}</p>
+                    <p>{params.row.record.length}</p>
                 )
             }
 
@@ -137,7 +143,7 @@ const GroupDT = ({ data }) => {
         {
             field: "action",
             headerName: "Action",
-            width: 250,
+            width: 200,
             renderCell: (params) => {
                 return (
                     <div className="cellAction">

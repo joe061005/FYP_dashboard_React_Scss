@@ -16,16 +16,16 @@ const Group = () => {
 
     const { setShowAlert, isLogout, showAlert } = useContext(UserContext)
 
-    const [locationData, setLocationData] = useState([])
+    const [groupData, setGroupData] = useState([])
     const [isLoading, setIsLoading] = useState(true)
 
-    const getLocationData = async () => {
+    const getGroupData = async () => {
         await API.getAllGroup().then(([code, data, header]) => {
             if (code == '401' || code == '500') {
                 console.log(data)
             } else if (code == '200') {
-                setLocationData(data)
-                localStorage.setItem('locationData', JSON.stringify(data))
+                setGroupData(data)
+                localStorage.setItem('groupData', JSON.stringify(data))
                 setIsLoading(false)
             }
         })
@@ -34,9 +34,9 @@ const Group = () => {
     useEffect(() => {
         console.log(navigationType)
         if (navigationType != "POP") {
-            getLocationData()
+            getGroupData()
         } else {
-            setLocationData(JSON.parse(localStorage.getItem('locationData')))
+            setGroupData(JSON.parse(localStorage.getItem('groupData')))
             setIsLoading(false)
         }
     }, [])
@@ -64,7 +64,7 @@ const Group = () => {
                             <ReactLoading type="spin" color="#6439ff" />
                         </div>
                         :
-                        <GroupDT data={locationData} />
+                        <GroupDT data={groupData} />
                     }
                 </div>
             </div>

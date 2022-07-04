@@ -19,6 +19,8 @@ import { useContext, useState } from "react";
 import {UserContext} from "./context/UserContext"
 import SessionDetail from "./pages/session/SessionDetail"
 import LocationDetail from "./pages/location/LocationDetail"
+import GroupDetail from "./pages/group/GroupDetail"
+
 
 
 function App() {
@@ -48,6 +50,7 @@ function App() {
             </Route>
             <Route path="groups">
               <Route index element={<Group />}/>
+              <Route path= "groupDetail" element={<GroupDetail />}/>
             </Route>
             <Route path="locations">
               <Route index element={<Location />}/>

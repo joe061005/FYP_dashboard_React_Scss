@@ -118,7 +118,7 @@ const SessionDT = ({ data }) => {
             }
         },
         {
-            field: "action", headerName: "Action", width: 250, renderCell: (params) => {
+            field: "action", headerName: "Action", width: 200, renderCell: (params) => {
                 return (
                     <div className="cellAction">
                         <div className="viewButton" onClick={(e) => { e.stopPropagation(); navigate('/sessions/sessionDetail', { state: { sessionData: params.row } }) }}>
