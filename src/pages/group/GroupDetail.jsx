@@ -13,6 +13,9 @@ import ReactLoading from 'react-loading';
 import API from '../../Api/Api';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+import CancelIcon from '@mui/icons-material/Cancel';
+import { useEffect } from 'react';
+import { SettingsSystemDaydreamTwoTone } from '@mui/icons-material';
 
 
 const GroupDetail = () => {
@@ -26,9 +29,64 @@ const GroupDetail = () => {
 
 
     const [isLoadingDelete, setIsLoadingDelete] = useState(false)
+    const [filteredData, setFilteredData] = useState({ centroids: [], record: [] })
 
     const rounding = (num) => {
         return Math.round(num * 10) / 10
+    }
+
+    const quitGroupConfirm = (id) => {
+        confirmAlert({
+            customUI: ({ onClose }) => {
+                return (
+                    <div className='custom-ui'>
+                        <h1>Are you sure?</h1>
+                        <p>{`Do you want to delete the group member (ID: ${id})`}</p>
+                        <button onClick={() => { quitGroup(id); onClose() }}>Yes</button>
+                        <button onClick={() => { onClose() }}>No</button>
+                    </div>
+                )
+            }
+        })
+    }
+
+    const quitGroup = (id) => {
+        const params = {
+            formID: id
+        }
+
+        const newList = filteredData.record.filter((row, index) => {
+            return row._id != id
+        })
+
+        const newRecord = {...filteredData, record: newList}
+
+        console.log("newRecord: ", newRecord)
+
+        setFilteredData((prev) =>  ({...prev, record: newList}))
+
+        const OgGroupData = JSON.parse(localStorage.getItem('groupData'))
+        const newGpList = OgGroupData.map((row, index) => {
+            return row._id == filteredData._id? newRecord : row
+        })
+
+        console.log("newGPLIST: ", newGpList)
+        localStorage.setItem('groupData', JSON.stringify(newGpList))
+
+
+        // setIsLoadingDelete(true)
+
+        // await API.quitGroup(params).then(([code, data, header]) => {
+        //     if (code == '401' || code == '500') {
+        //         console.log(data)
+        //     } else if (code == '200') {
+        //         const newList = groupData.record.filter((row, index) => {
+        //             return row._id != id
+        //         })
+        //         groupData.record = newList
+        //     }
+        // })
+        // setIsLoadingDelete(false)
     }
 
     const deleteGroupsConfirm = (id) => {
@@ -38,7 +96,7 @@ const GroupDetail = () => {
                 return (
                     <div className='custom-ui'>
                         <h1>Are you sure?</h1>
-                        <p>{`Do you want to delete the selected record(s) (ID: ${id})`}</p>
+                        <p>{`Do you want to delete the group record (ID: ${id})`}</p>
                         <button onClick={() => { deleteGroup(id); onClose() }}>Yes</button>
                         <button onClick={() => { onClose() }}>No</button>
                     </div>
@@ -69,6 +127,10 @@ const GroupDetail = () => {
         setIsLoadingDelete(false)
         navigate(-1)
     }
+
+    useEffect(() => {
+        setFilteredData(groupData)
+    }, [])
 
 
 
@@ -108,25 +170,28 @@ const GroupDetail = () => {
                             <div className='detailContainer'>
                                 <div className="formInput">
                                     <label>Group ID:</label>
-                                    <p className="datatext">{groupData._id}</p>
+                                    <p className="datatext">{filteredData._id}</p>
                                 </div>
                                 <div className="formInput">
                                     <label>Creation Time:</label>
-                                    <p className="datatext">{groupData.timestamp}</p>
+                                    <p className="datatext">{filteredData.timestamp}</p>
                                 </div>
                                 <div className="formInput">
                                     <label>Start Time:</label>
-                                    <p className="datatext">{groupData.startTime == 0 ? "Morning" : groupData.startTime == 1 ? "Afternoon" : "Night"}</p>
+                                    <p className="datatext">{filteredData.startTime == 0 ? "Morning" : filteredData.startTime == 1 ? "Afternoon" : "Night"}</p>
                                 </div>
                                 <div className="formInput">
                                     <label>(Age, Experience, Difficulty, Time, View):</label>
-                                    <p className="datatext">{`(${rounding(groupData.centroids[0])}, ${rounding(groupData.centroids[1])}, ${rounding(groupData.centroids[2])}, ${rounding(groupData.centroids[3])}, ${rounding(groupData.centroids[4])})`}</p>
+                                    <p className="datatext">{`(${rounding(filteredData.centroids[0])}, ${rounding(filteredData.centroids[1])}, ${rounding(filteredData.centroids[2])}, ${rounding(filteredData.centroids[3])}, ${rounding(filteredData.centroids[4])})`}</p>
                                 </div>
                                 <div className="GroupDetail">
                                     <label>Group Member (Phone Number):</label>
-                                    {groupData.record.map((value, index) => {
+                                    {filteredData.record.map((value, index) => {
                                         return (
-                                            <p className="datatext">{`${value.name}${value.phoneNumber? ` (${value.phoneNumber})`: ""}`}</p>
+                                            <div className="groupMember">
+                                                <p className="datatext">{`${value.name}${value.phoneNumber ? ` (${value.phoneNumber})` : ""}`}</p>
+                                                <CancelIcon className='deleteIcon' onClick={() => { quitGroupConfirm(value._id); }} />
+                                            </div>
                                         )
                                     })}
                                 </div>
@@ -136,7 +201,8 @@ const GroupDetail = () => {
                                         <ReactLoading type="spin" color="#de4949" />
                                     </div>
                                     :
-                                    <button onClick={() => { deleteGroupsConfirm(groupData._id) }}>Delete</button>
+                                    <button onClick={() => { deleteGroupsConfirm(filteredData._id) }}>Delete</button>
+
                                 }
                             </div>
                         </div>

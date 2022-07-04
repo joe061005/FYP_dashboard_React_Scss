@@ -96,6 +96,15 @@ var api = {
         return post(request)
     },
 
+    quitGroup: (props) => {
+        var request = {
+            method: 'admin/quitGroup',
+            params: props
+        }
+
+        return post(request)
+    },
+
     // location page
     getAllLocation: () => {
         var request = {

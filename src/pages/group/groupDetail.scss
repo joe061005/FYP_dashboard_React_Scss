@@ -63,7 +63,7 @@
                     gap: 20px;
 
 
-                    .formInput, .GroupDetail {
+                    .formInput {
                         width: 45%;
 
                         p {
@@ -73,25 +73,40 @@
                         }
                     }
 
-                    .GroupDetail{
+                    .GroupDetail {
                         width: 90%;
+
+                        .groupMember {
+                            margin-top: 10px;
+                            width: 103%;
+                            padding: 5px;
+                            border-bottom: 1px solid gray;
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+                        }
+
+                        .deleteIcon{
+                            color: #de4949;
+                            cursor: pointer;
+                        }
                     }
 
-                    .mapContainer{
+                    .mapContainer {
                         width: 85%;
 
-                        .mapLabel{
+                        .mapLabel {
                             display: block;
                         }
 
-                        .map{
+                        .map {
                             border: 0;
                             margin-top: 5px;
                         }
- 
+
                     }
 
-                    .loading{
+                    .loading {
                         width: 90%;
                         display: flex;
                         justify-content: center;
@@ -101,8 +116,10 @@
 
                     }
 
+
+
                     button {
-                        width: 85%;
+                        width: 94%;
                         padding: 10px;
                         border: none;
                         background-color: #de4949;
@@ -114,6 +131,8 @@
                         margin-bottom: 20px;
 
                     }
+
+
                 }
             }
 
