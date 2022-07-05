@@ -78,6 +78,24 @@ var api = {
         return post(request)
     },
 
+     // form page
+     getAllForm: () => {
+        var request = {
+            method: 'admin/getAllForm'
+        }
+
+        return get(request)
+    },
+
+    deleteForms: (props) => {
+        var request = {
+            method: 'admin/deleteForms',
+            params: props
+        }
+
+        return post(request)
+    },
+
     // group page
     getAllGroup: () => {
         var request = {
