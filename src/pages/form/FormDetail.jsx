@@ -6,35 +6,40 @@ import ReactJsAlert from "reactjs-alert"
 import { UserContext } from '../../context/UserContext';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { useNavigate, useLocation } from 'react-router-dom';
-import './sessionDetail.scss'
+import './formDetail.scss'
 import '../../components/customUI/customUI.scss'
 import momentTz from 'moment-timezone'
 import ReactLoading from 'react-loading';
 import API from '../../Api/Api';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+import { useEffect } from 'react';
 
 
-const SessionDetail = () => {
+
+const FormDetail = () => {
 
     const navigate = useNavigate();
 
     const { state } = useLocation();
-    const { sessionData } = state
+    const { formData } = state
 
     const { setShowAlert, isLogout, showAlert } = useContext(UserContext)
 
-    const [isLoadingDelete, setIsLoadingDelete] = useState(false)
 
-    const deleteSessionsConfirm = (id) => {
+    const [isLoadingDelete, setIsLoadingDelete] = useState(false)
+    const [filteredData, setFilteredData] = useState({})
+
+
+    const deleteFormsConfirm = (id) => {
         console.log("called", id)
         confirmAlert({
             customUI: ({ onClose }) => {
                 return (
                     <div className='custom-ui'>
                         <h1>Are you sure?</h1>
-                        <p>{`Do you want to delete this session record (ID: ${id})`}</p>
-                        <button onClick={() => { deleteSession(id); onClose() }}>Yes</button>
+                        <p>{`Do you want to delete the form record (User ID: ${id})`}</p>
+                        <button onClick={() => { deleteForm(id); onClose() }}>Yes</button>
                         <button onClick={() => { onClose() }}>No</button>
                     </div>
                 )
@@ -43,27 +48,35 @@ const SessionDetail = () => {
 
     }
 
-    const deleteSession = async (id) => {
+    const deleteForm = async (id) => {
         const params = {
-            sessionList: [id]
-        };
+            userID: id
+        }
 
         setIsLoadingDelete(true)
 
-        await API.deleteSessions(params).then(([code, data, header]) => {
+        await API.quitGroup(params).then(([code, data, header]) => {
             if (code == '401' || code == '500') {
                 console.log(data)
             } else if (code == '200') {
-                const filteredData = JSON.parse(localStorage.getItem('sessionData'))
+
+                const filteredData = JSON.parse(localStorage.getItem('formData'))
+
                 const newList = filteredData.filter((row, index) => {
-                    return row._id != id
+                    return row.user != id
                 })
-                localStorage.setItem('sessionData', JSON.stringify(newList))
+                localStorage.setItem('formData', JSON.stringify(newList))
+
+
             }
         })
         setIsLoadingDelete(false)
         navigate(-1)
     }
+
+    useEffect(() => {
+        setFilteredData(formData)
+    }, [])
 
 
 
@@ -73,18 +86,20 @@ const SessionDetail = () => {
             spinner
             text='Logout...'
         >
+
             <ReactJsAlert
                 status={showAlert}
                 type="error"
                 title="Please try again later!"
                 Close={() => setShowAlert(false)}
             />
-            <div className="sessionDetail">
+            <div className="formDetail">
                 <div className="sideBarContainer">
                     <Sidebar />
                 </div>
                 <div className="newContainer">
                     <Navbar />
+
                     <div className="top">
                         <div className="goBackButton" onClick={() => { navigate(-1) }}>
                             <ArrowBackIosNewIcon />
@@ -94,7 +109,7 @@ const SessionDetail = () => {
                     <div className="bottom">
                         <div className="left">
                             <img
-                                src="https://cdn.pixabay.com/photo/2020/11/28/11/25/cookie-5784367_960_720.png"
+                                src="https://cdn-icons-png.flaticon.com/512/1484/1484799.png"
                                 alt=""
                             />
 
@@ -102,59 +117,71 @@ const SessionDetail = () => {
                         <div className="right">
                             <div className='detailContainer'>
                                 <div className="formInput">
-                                    <label>Session ID:</label>
-                                    <p className="datatext">{sessionData._id}</p>
+                                    <label>Submisssion Time:</label>
+                                    <p className="datatext">{filteredData.timestamp}</p>
                                 </div>
                                 <div className="formInput">
-                                    <label>Expires:</label>
-                                    <p className="datatext">{momentTz.tz(sessionData.expires, "Asia/Hong_Kong").format("DD-MM-YYYY HH:mm:ss")}</p>
-                                </div>
-                                <div className="formInput">
-                                    <label>Active Time:</label>
-                                    <p className="datatext">{sessionData.activeTime}</p>
+                                    <label>Form ID:</label>
+                                    <p className="datatext">{filteredData._id}</p>
                                 </div>
                                 <div className="formInput">
                                     <label>User ID:</label>
-                                    <p className="datatext">{sessionData.session.iden}</p>
+                                    <p className="datatext">{filteredData.user}</p>
                                 </div>
                                 <div className="formInput">
-                                    <label>Max Age (ms):</label>
-                                    <p className="datatext">{sessionData.session.cookie.originalMaxAge}</p>
+                                    <label>Name:</label>
+                                    <p className="datatext">{filteredData.name}</p>
                                 </div>
                                 <div className="formInput">
-                                    <label>Secure:</label>
-                                    <p className="datatext">{sessionData.session.cookie.secure? sessionData.session.cookie.secure: "null"}</p>
+                                    <label>Phone Number:</label>
+                                    <p className="datatext">{filteredData.phoneNumber ? filteredData.phoneNumber : "No phone number"}</p>
                                 </div>
                                 <div className="formInput">
-                                    <label>HTTP Only:</label>
-                                    <p className="datatext">{sessionData.session.cookie.httpOnly.toString()}</p>
+                                    <label>Gender:</label>
+                                    <p className="datatext">{filteredData.gender == 0 ? "Female" : "Male"}</p>
                                 </div>
                                 <div className="formInput">
-                                    <label>Domain:</label>
-                                    <p className="datatext">{sessionData.session.cookie.domain? sessionData.session.cookie.domain: "null"}</p>
+                                    <label>Age:</label>
+                                    <p className="datatext">{`${filteredData.age}0-${filteredData.age}9`}</p>
                                 </div>
                                 <div className="formInput">
-                                    <label>Path:</label>
-                                    <p className="datatext">{sessionData.session.cookie.path}</p>
+                                    <label>Hiking Experience:</label>
+                                    <p className="datatext">{filteredData.experience == 1 ? "0-2 year(s)" : `${filteredData.experience * 2 - 1}-${filteredData.experience * 2} year(s)`}</p>
                                 </div>
                                 <div className="formInput">
-                                    <label>Same Site:</label>
-                                    <p className="datatext">{sessionData.session.cookie.sameSite? sessionData.session.cookie.sameSite: "null"}</p>
+                                    <label>Trail Difficulty:</label>
+                                    <p className="datatext">{`${filteredData.difficulty} star(s)`}</p>
                                 </div>
+                                <div className="formInput">
+                                    <label>Trail Duration:</label>
+                                    <p className="datatext">{filteredData.time == 1 ? "1-2 hour(s)" : `${filteredData.time * 2 - 1}-${filteredData.time * 2} hour(s)` }</p>
+                                </div>
+                                <div className="formInput">
+                                    <label>Start Time:</label>
+                                    <p className="datatext">{filteredData.startTime == 0 ? "morning" : filteredData.startTime == 1 ? "afternoon" : "night"}</p>
+                                </div>
+                                <div className="formInput">
+                                    <label>Hiking Experience:</label>
+                                    <p className="datatext">{`${filteredData.view} star(s)` }</p>
+                                </div>
+
+
                                 {isLoadingDelete ?
                                     <div className="loading">
                                         <ReactLoading type="spin" color="#de4949" />
                                     </div>
                                     :
-                                    <button onClick={() => {deleteSessionsConfirm(sessionData._id)}}>Delete</button>
+                                    <button onClick={() => { deleteFormsConfirm(filteredData.user) }}>Delete</button>
+
                                 }
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
         </LoadingOverlay>
     )
 }
 
-export default SessionDetail
+export default FormDetail

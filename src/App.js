@@ -16,49 +16,51 @@ import Location from './pages/location/Location'
 import Session from './pages/session/Session'
 import "./style/dark.scss"
 import { useContext, useState } from "react";
-import {UserContext} from "./context/UserContext"
+import { UserContext } from "./context/UserContext"
 import SessionDetail from "./pages/session/SessionDetail"
 import LocationDetail from "./pages/location/LocationDetail"
 import GroupDetail from "./pages/group/GroupDetail"
+import FormDetail from "./pages/form/FormDetail"
 
 
 
 function App() {
 
-  const {dark} = useContext(UserContext)
+  const { dark } = useContext(UserContext)
 
   return (
-    <div className={dark? "app dark" : "app"}>
+    <div className={dark ? "app dark" : "app"}>
       <BrowserRouter>
         <Routes>
           <Route path="/">
             <Route index element={<Login />} />
-            <Route path = "home" element={<Home />}/>
+            <Route path="home" element={<Home />} />
             <Route path="users">
-              <Route index element={<List />}/>
-              <Route path="addUser" element={<New />}/>
+              <Route index element={<List />} />
+              <Route path="addUser" element={<New />} />
             </Route>
             <Route path="trails">
-              <Route index element={<Trail />}/>
-              <Route path="addTrail" element={<New />}/>
+              <Route index element={<Trail />} />
+              <Route path="addTrail" element={<New />} />
             </Route>
             <Route path="trailInfo">
-              <Route index element={<TrailInfo />}/>
+              <Route index element={<TrailInfo />} />
             </Route>
             <Route path="forms">
-              <Route index element={<Form/>}/>
+              <Route index element={<Form />} />
+              <Route path="formDetail" element={<FormDetail />} />
             </Route>
             <Route path="groups">
-              <Route index element={<Group />}/>
-              <Route path= "groupDetail" element={<GroupDetail />}/>
+              <Route index element={<Group />} />
+              <Route path="groupDetail" element={<GroupDetail />} />
             </Route>
             <Route path="locations">
-              <Route index element={<Location />}/>
-              <Route path= "locationDetail"  element={<LocationDetail />}/>
+              <Route index element={<Location />} />
+              <Route path="locationDetail" element={<LocationDetail />} />
             </Route>
             <Route path="sessions">
-              <Route index element={<Session />}/>
-              <Route path= "sessionDetail"  element={<SessionDetail />}/>
+              <Route index element={<Session />} />
+              <Route path="sessionDetail" element={<SessionDetail />} />
             </Route>
           </Route>
         </Routes>

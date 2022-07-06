@@ -34,7 +34,7 @@ const LocationDetail = () => {
                 return (
                     <div className='custom-ui'>
                         <h1>Are you sure?</h1>
-                        <p>{`Do you want to delete the selected record(s) (ID: ${id})`}</p>
+                        <p>{`Do you want to delete this location record (ID: ${id})`}</p>
                         <button onClick={() => { deleteLocation(id); onClose() }}>Yes</button>
                         <button onClick={() => { onClose() }}>No</button>
                     </div>

@@ -28,7 +28,7 @@ const FormDT = ({ data }) => {
                 return (
                     <div className='custom-ui'>
                         <h1>Are you sure?</h1>
-                        <p>{`Do you want to delete the selected record(s) ${id ? `(ID: ${id})` : `(Total: ${selectedRows.length})`}`}</p>
+                        <p>{`Do you want to delete the selected record(s) ${id ? `(User ID: ${id})` : `(Total: ${selectedRows.length})`}`}</p>
                         <button onClick={() => { id ? deleteForms(id) : deleteForms(); onClose() }}>Yes</button>
                         <button onClick={() => { onClose() }}>No</button>
                     </div>
@@ -43,38 +43,64 @@ const FormDT = ({ data }) => {
 
         var params;
 
+
         if (!id) {
             if (selectedRows.length == 0) return setShowAlert(true)
-            params = {
-                formList: selectedRows
-            }
-        } else {
-            params = {
-                formList: [id]
-            }
-        }
 
-        setIsLoadingDelete(true)
+            setIsLoadingDelete(true)
 
-        await API.deleteForms(params).then(([code, data, header]) => {
-            if (code == '401' || code == '500') {
-                console.log(data)
-            } else if (code == '200') {
-                var newList;
-                if (id) {
-                    newList = filteredData.filter((row, index) => {
-                        return row._id != id
-                    })
+            const selectedData = filteredData.filter((data) => {
+                return selectedRows.includes(data._id)
+            })
 
-                } else {
-                    newList = filteredData.filter((row, index) => {
-                        return !selectedRows.includes(row._id)
-                    })
+            console.log(selectedData)
+
+            for(let selectedRow of selectedData){
+                params = {
+                    userID: selectedRow.user
                 }
-                setFilteredData(newList)
-                localStorage.setItem('formData', JSON.stringify(newList))
+
+                await API.quitGroup(params).then(([code, data, header]) => {
+                    if (code == '401' || code == '500') {
+                        console.log(data)
+                    } else if (code == '200') {
+
+                        const filteredData = JSON.parse(localStorage.getItem('formData'))
+                        
+                        const newList = filteredData.filter((row, index) => {
+                            return row.user != selectedRow.user
+                        })
+
+                        console.log(newList)
+                        localStorage.setItem('formData', JSON.stringify(newList))
+
+                        
+                    }
+                })
             }
-        })
+
+            setFilteredData(JSON.parse(localStorage.getItem('formData')))
+
+
+        } else {
+            setIsLoadingDelete(true)
+
+            params = {
+                userID: id
+            }
+
+            await API.quitGroup(params).then(([code, data, header]) => {
+                if (code == '401' || code == '500') {
+                    console.log(data)
+                } else if (code == '200') {
+                    const newList = filteredData.filter((row, index) => {
+                        return row.user != id
+                    })
+                    setFilteredData(newList)
+                    localStorage.setItem('formData', JSON.stringify(newList))
+                }
+            })
+        }
 
         setIsLoadingDelete(false)
     }
@@ -86,53 +112,128 @@ const FormDT = ({ data }) => {
 
     const userColumns = [
         {
-            field: "date",
-            headerName: "Time",
+            field: "timestamp",
+            headerName: "Submission Time",
             type: 'string',
             headerAlign: 'left',
-            width: 250,
-            renderCell: (params) => {
-                return (
-                    <p>{momentTz.tz(params.row.date, "Asia/Hong_Kong").format("DD-MM-YYYY HH:mm:ss")}</p>
-                )
-            }
+            width: 180,
 
         },
         {
-            field: "groupID",
-            headerName: "Group ID",
-            type: 'string',
-            headerAlign: 'left',
-            width: 250,
-            renderCell: (params) => {
-                return (
-                    <p>{params.row.groupID ? params.row.groupID : "No group"}</p>
-                )
-            }
-
-        },
-
-        {
-            field: "userID",
+            field: "user",
             headerName: "User ID",
             type: 'string',
             headerAlign: 'left',
-            width: 250,
+            width: 240,
+
+        },
+        {
+            field: "name",
+            headerName: "Name",
+            type: 'string',
+            headerAlign: 'left',
+            width: 100,
+
         },
 
         {
-            field: "coordinate",
-            headerName: "Coordinate (latitude, longitude)",
+            field: "phoneNumber",
+            headerName: "Phone Number",
             type: 'string',
             headerAlign: 'left',
-            width: 250,
+            width: 170,
             renderCell: (params) => {
                 return (
-                    <p>{`(${params.row.coordinate.latitude}, ${params.row.coordinate.longitude})`}</p>
+                    <p>{params.row.phoneNumber ? params.row.phoneNumber : "No phone number"}</p>
                 )
             }
-
         },
+        {
+            field: "gender",
+            headerName: "Gender",
+            type: 'string',
+            headerAlign: 'left',
+            width: 100,
+            renderCell: (params) => {
+                return (
+                    <p>{params.row.gender == 0 ? "Female" : "Male"}</p>
+                )
+            }
+        },
+        {
+            field: "age",
+            headerName: "Age",
+            type: 'string',
+            headerAlign: 'left',
+            width: 110,
+            renderCell: (params) => {
+                return (
+                    <p>{`${params.row.age}0-${params.row.age}9`}</p>
+                )
+            }
+        },
+        {
+            field: "experience",
+            headerName: "Hiking Experience",
+            type: 'string',
+            headerAlign: 'left',
+            width: 170,
+            renderCell: (params) => {
+                return (
+                    <p>{params.row.experience == 1 ? "0-2 year(s)" : `${params.row.experience * 2 - 1}-${params.row.experience * 2} year(s)`}</p>
+                )
+            }
+        },
+        {
+            field: "difficulty",
+            headerName: "Trail Difficulty",
+            type: 'string',
+            headerAlign: 'left',
+            width: 150,
+            renderCell: (params) => {
+                return (
+                    <p>{`${params.row.difficulty} star(s)`}</p>
+                )
+            }
+        },
+        {
+            field: "time",
+            headerName: "Trail Duration",
+            type: 'string',
+            headerAlign: 'left',
+            width: 150,
+            renderCell: (params) => {
+                return (
+                    <p>{params.row.time == 1 ? "1-2 hour(s)" : `${params.row.time * 2 - 1}-${params.row.time * 2} hour(s)`}</p>
+                )
+            }
+        },
+        {
+            field: "startTime",
+            headerName: "Start Time",
+            type: 'string',
+            headerAlign: 'left',
+            width: 130,
+            renderCell: (params) => {
+                return (
+                    <p>{params.row.startTime == 0 ? "morning" : params.row.startTime == 1 ? "afternoon" : "night"}</p>
+                )
+            }
+        },
+        {
+            field: "view",
+            headerName: "Trail View",
+            type: 'string',
+            headerAlign: 'left',
+            width: 130,
+            renderCell: (params) => {
+                return (
+                    <p>{`${params.row.view} star(s)`}</p>
+                )
+            }
+        },
+
+
 
         {
             field: "action",
@@ -144,7 +245,7 @@ const FormDT = ({ data }) => {
                         <div className="viewButton" onClick={(e) => { e.stopPropagation(); navigate('/forms/formDetail', { state: { formData: params.row } }) }}>
                             View
                         </div>
-                        <div className="deleteButton" onClick={(e) => { e.stopPropagation(); deleteFormsConfirm(params.row._id) }}>
+                        <div className="deleteButton" onClick={(e) => { e.stopPropagation(); deleteFormsConfirm(params.row.user) }}>
                             Delete
                         </div>
                     </div>
