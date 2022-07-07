@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import './login.scss'
 import logo from '../../asset/logo.png'
 import PersonIcon from '@mui/icons-material/Person';
@@ -10,7 +10,7 @@ import ReactJsAlert from "reactjs-alert"
 import ReactLoading from 'react-loading';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
-import cookie from 'react-cookies'
+import Cookie from 'js-cookie'
 
 const Login = () => {
 
@@ -55,6 +55,10 @@ const Login = () => {
     
 
   }
+
+  useEffect(() => {
+     console.log(Cookie.get())
+  }, [])
 
   return (
     <div className="loginBackground">
