@@ -158,10 +158,10 @@ const FormDetail = () => {
                                 </div>
                                 <div className="formInput">
                                     <label>Start Time:</label>
-                                    <p className="datatext">{filteredData.startTime == 0 ? "morning" : filteredData.startTime == 1 ? "afternoon" : "night"}</p>
+                                    <p className="datatext">{filteredData.startTime == 0 ? "Morning" : filteredData.startTime == 1 ? "Afternoon" : "Night"}</p>
                                 </div>
                                 <div className="formInput">
-                                    <label>Hiking Experience:</label>
+                                    <label>Trail View:</label>
                                     <p className="datatext">{`${filteredData.view} star(s)` }</p>
                                 </div>
 
