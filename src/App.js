@@ -21,7 +21,7 @@ import SessionDetail from "./pages/session/SessionDetail"
 import LocationDetail from "./pages/location/LocationDetail"
 import GroupDetail from "./pages/group/GroupDetail"
 import FormDetail from "./pages/form/FormDetail"
-
+import TrailInfoDetail from "./pages/trail Info/TrailInfoDetail";
 
 
 function App() {
@@ -45,6 +45,7 @@ function App() {
             </Route>
             <Route path="trailInfo">
               <Route index element={<TrailInfo />} />
+              <Route path="infoDetail" element={<TrailInfoDetail />} />
             </Route>
             <Route path="forms">
               <Route index element={<Form />} />

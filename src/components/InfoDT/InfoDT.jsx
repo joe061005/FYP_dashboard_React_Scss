@@ -147,7 +147,7 @@ const InfoDT = ({ data }) => {
             renderCell: (params) => {
                 return (
                     <div className="cellAction">
-                        <div className="viewButton" onClick={(e) => { e.stopPropagation(); navigate('/infos/infoDetail', { state: { infoData: params.row } }) }}>
+                        <div className="viewButton" onClick={(e) => { e.stopPropagation(); navigate('/trailInfo/infoDetail', { state: { infoData: params.row } }) }}>
                             View
                         </div>
                         <div className="deleteButton" onClick={(e) => { e.stopPropagation(); deleteInfosConfirm(params.row._id) }}>
