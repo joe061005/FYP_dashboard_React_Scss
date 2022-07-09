@@ -30,54 +30,27 @@ const Home = () => {
   const [detailDataType, setDetailDataType] = useState('')
   const [detailData, setDetailData] = useState([])
 
-
-  const getUserData = async () => {
-    await API.getUserData().then(([code, data, header]) => {
+  const getAllData = async () => {
+    await API.getAllData().then(([code, data, header]) => {
       if (code == '401' || code == '500') {
         console.log(data)
       } else if (code == '200') {
-        setUserData(data)
-        localStorage.setItem('userDB', JSON.stringify(data))
-      }
-    })
-  }
-
-  const getInfoData = async () => {
-    await API.getInfoData().then(([code, data, header]) => {
-      if (code == '401' || code == '500') {
-        console.log(data)
-      } else if (code == '200') {
-        setInfoData(data)
-        localStorage.setItem('infoDB', JSON.stringify(data))
-      }
-    })
-  }
-
-  const getFormData = async () => {
-    await API.getFormData().then(([code, data, header]) => {
-      if (code == '401' || code == '500') {
-        console.log(data)
-      } else if (code == '200') {
-        setFormData(data)
-        localStorage.setItem('formDB', JSON.stringify(data))
-      }
-    })
-  }
-
-  const getGroupData = async () => {
-    await API.getGroupData().then(([code, data, header]) => {
-      if (code == '401' || code == '500') {
-        console.log(data)
-      } else if (code == '200') {
-        setGroupData(data)
-        localStorage.setItem('groupDB', JSON.stringify(data))
+        console.log(data.user)
+        setUserData(data.user)
+        setInfoData(data.info)
+        setFormData(data.form)
+        setGroupData(data.group)
+        localStorage.setItem('userDB', JSON.stringify(data.user))
+        localStorage.setItem('infoDB', JSON.stringify(data.info))
+        localStorage.setItem('formDB', JSON.stringify(data.form))
+        localStorage.setItem('groupDB', JSON.stringify(data.group))
       }
     })
   }
 
   useEffect(() => {
     if (navigationType != "POP") {
-      Promise.all([getUserData(), getInfoData(), getFormData(), getGroupData()]).then(() => {
+      Promise.all([getAllData()]).then(() => {
         setIsLoading(false);
         setDetailDataType('userData')
       })
@@ -111,7 +84,7 @@ const Home = () => {
     }
   }, [detailDataType])
 
-  return(
+  return (
     <LoadingOverlay
       active={isLogout}
       spinner
@@ -159,7 +132,7 @@ const Home = () => {
         </div>
       </div>
     </LoadingOverlay>
-  ) 
+  )
 }
 
 

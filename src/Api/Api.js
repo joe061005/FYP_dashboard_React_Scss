@@ -2,7 +2,7 @@
 //import moment from 'moment'
 
 const api_path = {
-    baseURL: 'https://c168-223-19-143-35.ngrok.io/'
+    baseURL: 'https://92b9-223-19-143-35.ngrok.io/'
 }
 
 //let date = moment().format('YYYY-MM-DD');
@@ -28,33 +28,9 @@ var api = {
     },
 
     // dashboard page
-    getUserData: () => {
+    getAllData: () => {
         var request = {
-            method: 'admin/userDashboard'
-        }
-
-        return get(request)
-    },
-
-    getInfoData: () => {
-        var request = {
-            method: 'admin/infoDashboard'
-        }
-
-        return get(request)
-    },
-
-    getFormData: () => {
-        var request = {
-            method: 'admin/formDashboard'
-        }
-
-        return get(request)
-    },
-
-    getGroupData: () => {
-        var request = {
-            method: 'admin/groupDashboard'
+            method: 'admin/allDashboard'
         }
 
         return get(request)
