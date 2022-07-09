@@ -53,6 +53,26 @@ var api = {
 
         return post(request)
     },
+
+    // trail page
+    getAllTrail: () => {
+        var request = {
+            method: 'admin/getAllTrail'
+        }
+
+        return get(request)
+    },
+
+    deleteTrails: (props) => {
+        var request = {
+            method: 'admin/deleteTrails',
+            params: props
+        }
+
+        return post(request)
+    },
+
+
     // info page
     getAllInfo: () => {
         var request = {
