@@ -90,14 +90,14 @@ const TrailDT = ({ data }) => {
             headerName: "Creation Time",
             type: 'string',
             headerAlign: 'left',
-            width: 250,
+            width: 200,
         },
         {
             field: "district",
             headerName: "Territory",
             type: 'string',
             headerAlign: 'left',
-            width: 250,
+            width: 150,
 
         },
 
@@ -106,7 +106,7 @@ const TrailDT = ({ data }) => {
             headerName: "District",
             type: 'string',
             headerAlign: 'left',
-            width: 250,
+            width: 150,
         },
 
         {
@@ -114,7 +114,7 @@ const TrailDT = ({ data }) => {
             headerName: "Trail Name",
             type: 'string',
             headerAlign: 'left',
-            width: 250,
+            width: 150,
         },
 
         {
@@ -127,10 +127,23 @@ const TrailDT = ({ data }) => {
 
         {
             field: "distance",
-            headerName: "Distance",
+            headerName: "Distance (km)",
             type: 'string',
             headerAlign: 'left',
-            width: 250,
+            width: 130,
+        },
+
+        {
+            field: "star",
+            headerName: "Difficulty (1-5 stars)",
+            type: 'string',
+            headerAlign: 'left',
+            width: 180,
+            renderCell: (params) => {
+                return (
+                    <p>{params.row.star.filter((star) => { return star == '1' }).length}</p>
+                )
+            }
         },
 
         {
@@ -142,23 +155,16 @@ const TrailDT = ({ data }) => {
             renderCell: (params) => {
                 return (
                     <p>{params.row.time.split(".")[0] == '0' ?
-                        <Text style={localStyles.InfoText}>{data.time.split(".")[1]}分鐘</Text>
+                        `${params.row.time.split(".")[1]} minutes`
                         :
-                        data.time.split(".")[1] == '0' ?
-                            <Text style={localStyles.InfoText}>{data.time.split(".")[0]}小時</Text>
+                        params.row.time.split(".")[1] == '0' ?
+                            `${params.row.time.split(".")[0]} hours`
                             :
-                            <Text style={localStyles.InfoText}>{data.time.split(".")[0]}小時 {data.time.split(".")[1]}分鐘</Text>
-                    }</p>
+                            `${params.row.time.split(".")[0]} hours and ${params.row.time.split(".")[1]} minutes`
+                    }
+                    </p>
                 )
             }
-        },
-
-        {
-            field: "description",
-            headerName: "Description",
-            type: 'string',
-            headerAlign: 'left',
-            width: 250,
         },
 
         {
@@ -168,7 +174,7 @@ const TrailDT = ({ data }) => {
             renderCell: (params) => {
                 return (
                     <div className="cellAction">
-                        <div className="viewButton" onClick={(e) => { e.stopPropagation(); navigate('/trails/trailDetail', { state: { trailData: params.row } }) }}>
+                        <div className="viewButton" onClick={(e) => { e.stopPropagation(); navigate('/trails/trailDetail', { state: { trailId: params.row._id } }) }}>
                             View
                         </div>
                         <div className="deleteButton" onClick={(e) => { e.stopPropagation(); deleteTrailsConfirm(params.row._id) }}>

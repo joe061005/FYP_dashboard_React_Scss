@@ -2,7 +2,7 @@
 //import moment from 'moment'
 
 const api_path = {
-    baseURL: 'https://92b9-223-19-143-35.ngrok.io/'
+    baseURL: 'https://fee2-223-19-143-35.ngrok.io/'
 }
 
 //let date = moment().format('YYYY-MM-DD');
@@ -58,6 +58,14 @@ var api = {
     getAllTrail: () => {
         var request = {
             method: 'admin/getAllTrail'
+        }
+
+        return get(request)
+    },
+
+    getTrailInfo: (trailId) => {
+        var request = {
+            method: `admin/getTrail/${trailId}`,
         }
 
         return get(request)

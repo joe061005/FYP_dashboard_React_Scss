@@ -22,6 +22,7 @@ import LocationDetail from "./pages/location/LocationDetail"
 import GroupDetail from "./pages/group/GroupDetail"
 import FormDetail from "./pages/form/FormDetail"
 import TrailInfoDetail from "./pages/trail Info/TrailInfoDetail";
+import TrailDetail from './pages/Trail/TrailDetail'
 
 
 function App() {
@@ -41,7 +42,7 @@ function App() {
             </Route>
             <Route path="trails">
               <Route index element={<Trail />} />
-              <Route path="addTrail" element={<New />} />
+              <Route path="trailDetail" element={<TrailDetail />} />
             </Route>
             <Route path="trailInfo">
               <Route index element={<TrailInfo />} />
