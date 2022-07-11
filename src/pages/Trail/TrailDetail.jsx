@@ -14,6 +14,9 @@ import API from '../../Api/Api';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import { useEffect } from 'react';
+import SimpleImageSlider from "react-simple-image-slider";
+import { MapContainer, TileLayer, useMap } from 'react-leaflet'
+import 'leaflet/dist/leaflet.css';
 
 
 const TrailDetail = () => {
@@ -29,6 +32,7 @@ const TrailDetail = () => {
     const [isLoadingDelete, setIsLoadingDelete] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
     const [trailDetail, setTrailDetail] = useState([])
+    const [images, setImages] = useState([])
 
     const deleteTrailsConfirm = (id) => {
         console.log("called", id)
@@ -76,6 +80,10 @@ const TrailDetail = () => {
                 console.log(data)
             } else if (code == '200') {
                 setTrailDetail(data[0])
+                const images = data[0].image.map((img) => {
+                    return { url: img }
+                })
+                setImages(images)
                 setIsLoading(false)
             }
         })
@@ -161,12 +169,28 @@ const TrailDetail = () => {
                                                 `${trailDetail.time.split(".")[1]} minutes`
                                                 :
                                                 trailDetail.time.split(".")[1] == '0' ?
-                                                    `${trailDetail.time.split(".")[0]} hours`
+                                                    `${trailDetail.time.split(".")[0]} hour(s)`
                                                     :
-                                                    `${trailDetail.time.split(".")[0]} hours and ${trailDetail.time.split(".")[1]} minutes`
+                                                    `${trailDetail.time.split(".")[0]} hour(s) and ${trailDetail.time.split(".")[1]} minutes`
                                             }</p>
                                         </div>
+                                        <div className="imageContainer">
+                                            <SimpleImageSlider
+                                                images={images}
+                                                showBullets={true}
+                                                showNavs={true}
+                                                width={'47.5%'}
+                                                height={500}
+                                                autoPlay={true}
+                                            />
+                                        </div>
                                         <div className="mapContainer">
+                                            <MapContainer center={[trailDetail.marker[0].latlong.latitude, trailDetail.marker[0].latlong.longitude]} zoom={13} className="map">
+                                                <TileLayer
+                                                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                                                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                                />
+                                            </MapContainer>
                                         </div>
                                         {isLoadingDelete ?
                                             <div className="loading">

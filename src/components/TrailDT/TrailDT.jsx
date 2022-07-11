@@ -158,9 +158,9 @@ const TrailDT = ({ data }) => {
                         `${params.row.time.split(".")[1]} minutes`
                         :
                         params.row.time.split(".")[1] == '0' ?
-                            `${params.row.time.split(".")[0]} hours`
+                            `${params.row.time.split(".")[0]} hour(s)`
                             :
-                            `${params.row.time.split(".")[0]} hours and ${params.row.time.split(".")[1]} minutes`
+                            `${params.row.time.split(".")[0]} hour(s) and ${params.row.time.split(".")[1]} minutes`
                     }
                     </p>
                 )
