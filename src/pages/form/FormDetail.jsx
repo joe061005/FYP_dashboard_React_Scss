@@ -14,6 +14,7 @@ import API from '../../Api/Api';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import { useEffect } from 'react';
+LoadingOverlay.propTypes = undefined
 
 
 

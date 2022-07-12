@@ -7,6 +7,7 @@ import { UserContext } from '../../context/UserContext';
 import './new.scss'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { useNavigate } from 'react-router-dom';
+LoadingOverlay.propTypes = undefined
 
 
 const New = () => {

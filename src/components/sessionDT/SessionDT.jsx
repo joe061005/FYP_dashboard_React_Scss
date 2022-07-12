@@ -11,6 +11,7 @@ import momentTz from 'moment-timezone'
 import moment from 'moment';
 import API from '../../Api/Api';
 import LoadingOverlay from 'react-loading-overlay';
+LoadingOverlay.propTypes = undefined
 
 
 const SessionDT = ({ data }) => {

@@ -9,6 +9,7 @@ import ReactLoading from 'react-loading';
 import { useNavigationType } from 'react-router-dom'
 import API from '../../Api/Api'
 import TrailDT from '../../components/TrailDT/TrailDT'
+LoadingOverlay.propTypes = undefined
 
 
 const Trail = () => {

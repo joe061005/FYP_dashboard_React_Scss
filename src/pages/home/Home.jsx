@@ -13,6 +13,7 @@ import { UserContext } from '../../context/UserContext';
 import API from '../../Api/Api'
 import { DataSaverOffRounded } from '@mui/icons-material'
 import ReactLoading from 'react-loading';
+LoadingOverlay.propTypes = undefined
 
 
 const Home = () => {
@@ -35,7 +36,6 @@ const Home = () => {
       if (code == '401' || code == '500') {
         console.log(data)
       } else if (code == '200') {
-        console.log(data.user)
         setUserData(data.user)
         setInfoData(data.info)
         setFormData(data.form)

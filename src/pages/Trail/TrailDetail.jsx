@@ -15,8 +15,18 @@ import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import { useEffect } from 'react';
 import SimpleImageSlider from "react-simple-image-slider";
-import { MapContainer, TileLayer, useMap } from 'react-leaflet'
+import { MapContainer, TileLayer, useMap, Marker, Popup, Tooltip, Polyline } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css';
+import markerIconPng from "leaflet/dist/images/marker-icon.png"
+import { Icon } from 'leaflet'
+
+const myIcon = new Icon({
+    iconUrl: markerIconPng,
+    iconSize: [25, 41],
+    iconAnchor: [12, 41]
+})
+
+LoadingOverlay.propTypes = undefined
 
 
 const TrailDetail = () => {
@@ -33,6 +43,7 @@ const TrailDetail = () => {
     const [isLoading, setIsLoading] = useState(true)
     const [trailDetail, setTrailDetail] = useState([])
     const [images, setImages] = useState([])
+    const [path, setPath] = useState([])
 
     const deleteTrailsConfirm = (id) => {
         console.log("called", id)
@@ -83,6 +94,10 @@ const TrailDetail = () => {
                 const images = data[0].image.map((img) => {
                     return { url: img }
                 })
+                const path = data[0].path.map((path) => {
+                    return [path.latitude, path.longitude]
+                })
+                setPath(path)
                 setImages(images)
                 setIsLoading(false)
             }
@@ -91,7 +106,7 @@ const TrailDetail = () => {
 
     useEffect(() => {
         getTrailDetail()
-    })
+    }, [])
 
 
 
@@ -185,11 +200,21 @@ const TrailDetail = () => {
                                             />
                                         </div>
                                         <div className="mapContainer">
-                                            <MapContainer center={[trailDetail.marker[0].latlong.latitude, trailDetail.marker[0].latlong.longitude]} zoom={13} className="map">
+                                            <MapContainer center={[trailDetail.marker[0].latlong.latitude, trailDetail.marker[0].latlong.longitude]} zoom={15} className="map">
                                                 <TileLayer
                                                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                                                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                                                 />
+                                                {
+                                                    trailDetail.marker.map((marker, index) => (
+                                                        <Marker position={[marker.latlong.latitude, marker.latlong.longitude]} icon={myIcon} key={index}>
+                                                            <Tooltip permanent>
+                                                                {index == 0? `起點: ${marker.title}` : index == trailDetail.marker.length-1? `終點: ${marker.title}` : `${marker.title}`}
+                                                            </Tooltip>
+                                                        </Marker>
+                                                    ))
+                                                }
+                                                <Polyline pathOptions={{ color: 'black' }} positions={path} />
                                             </MapContainer>
                                         </div>
                                         {isLoadingDelete ?

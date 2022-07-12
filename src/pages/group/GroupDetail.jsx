@@ -16,6 +16,7 @@ import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import CancelIcon from '@mui/icons-material/Cancel';
 import { useEffect } from 'react';
 import { SettingsSystemDaydreamTwoTone } from '@mui/icons-material';
+LoadingOverlay.propTypes = undefined
 
 
 const GroupDetail = () => {
@@ -196,7 +197,7 @@ const GroupDetail = () => {
                                         <label>Group Member (Phone Number):</label>
                                         {filteredData.record.map((value, index) => {
                                             return (
-                                                <div className="groupMember">
+                                                <div className="groupMember" key={index}>
                                                     <p className="datatext">{`${value.name}${value.phoneNumber ? ` (${value.phoneNumber})` : ""}  - ${value.age},${value.experience},${value.difficulty},${value.time},${value.view}`}</p>
                                                     <CancelIcon className='deleteIcon' onClick={() => { quitGroupConfirm(value.user); }} />
                                                 </div>

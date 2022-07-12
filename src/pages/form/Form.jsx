@@ -9,6 +9,7 @@ import ReactLoading from 'react-loading';
 import { useNavigationType } from 'react-router-dom'
 import API from '../../Api/Api'
 import FormDT from '../../components/FormDT/FormDT';
+LoadingOverlay.propTypes = undefined
 
 const Form = () => {
 

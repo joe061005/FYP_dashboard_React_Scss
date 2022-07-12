@@ -5,6 +5,7 @@ import Sidebar from '../../components/sidebar/Sidebar'
 import LoadingOverlay from 'react-loading-overlay';
 import ReactJsAlert from "reactjs-alert"
 import { UserContext } from '../../context/UserContext';
+LoadingOverlay.propTypes = undefined
 
 const Single = () => {
 

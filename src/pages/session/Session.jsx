@@ -9,6 +9,7 @@ import SessionDT from '../../components/sessionDT/SessionDT'
 import API from '../../Api/Api'
 import ReactLoading from 'react-loading';
 import { useNavigationType } from 'react-router-dom'
+LoadingOverlay.propTypes = undefined
 
 const Session = () => {
 

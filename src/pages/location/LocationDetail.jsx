@@ -13,7 +13,18 @@ import ReactLoading from 'react-loading';
 import API from '../../Api/Api';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+import { MapContainer, TileLayer, useMap, Marker, Popup, Tooltip, Polyline} from 'react-leaflet'
+import 'leaflet/dist/leaflet.css';
+import markerIconPng from "leaflet/dist/images/marker-icon.png"
+import { Icon } from 'leaflet'
 
+const myIcon = new Icon({
+    iconUrl: markerIconPng,
+    iconSize: [25, 41],
+    iconAnchor: [12, 41]
+})
+
+LoadingOverlay.propTypes = undefined
 
 const LocationDetail = () => {
 
@@ -120,12 +131,17 @@ const LocationDetail = () => {
                                 </div>
                                 <div className="mapContainer">
                                     <label className='mapLabel'>Coordinate: {`(${locationData.coordinate.latitude}, ${locationData.coordinate.longitude})`}</label>
-                                    <iframe
-                                        src={`https://leaflet-api.vercel.app/?center=${locationData.coordinate.latitude},${locationData.coordinate.longitude}&zoom=17&marker=User%20Location%7C${locationData.coordinate.latitude},${locationData.coordinate.longitude}`}
-                                        width="100%"
-                                        height="400"
-                                        className='map'
-                                    />
+                                    <MapContainer center={[locationData.coordinate.latitude, locationData.coordinate.longitude]} zoom={17} className="map">
+                                        <TileLayer
+                                            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                        />
+                                        <Marker position={[locationData.coordinate.latitude, locationData.coordinate.longitude]} icon={myIcon}>
+                                            <Tooltip permanent>
+                                                Info Location
+                                            </Tooltip>
+                                        </Marker>
+                                    </MapContainer>
                                 </div>
                                 {isLoadingDelete ?
                                     <div className="loading">

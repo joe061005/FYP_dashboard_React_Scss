@@ -9,6 +9,7 @@ import GroupDT from '../../components/GroupDT/GroupDT'
 import API from '../../Api/Api'
 import ReactLoading from 'react-loading';
 import { useNavigationType } from 'react-router-dom'
+LoadingOverlay.propTypes = undefined
 
 
 const Group = () => {

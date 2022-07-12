@@ -9,6 +9,7 @@ import ReactLoading from 'react-loading';
 import { useNavigationType } from 'react-router-dom'
 import API from '../../Api/Api'
 import LocationDT from '../../components/LocationDT/LocationDT';
+LoadingOverlay.propTypes = undefined
 
 
 const Location = () => {

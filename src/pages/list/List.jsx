@@ -9,6 +9,7 @@ import './list.scss'
 import API from '../../Api/Api'
 import ReactLoading from 'react-loading';
 import momentTz from 'moment-timezone'
+LoadingOverlay.propTypes = undefined
 
 const List = () => {
 

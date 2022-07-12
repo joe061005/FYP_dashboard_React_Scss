@@ -13,6 +13,18 @@ import ReactLoading from 'react-loading';
 import API from '../../Api/Api';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+import { MapContainer, TileLayer, useMap, Marker, Popup, Tooltip, Polyline } from 'react-leaflet'
+import 'leaflet/dist/leaflet.css';
+import markerIconPng from "leaflet/dist/images/marker-icon.png"
+import { Icon } from 'leaflet'
+
+const myIcon = new Icon({
+    iconUrl: markerIconPng,
+    iconSize: [25, 41],
+    iconAnchor: [12, 41]
+})
+
+LoadingOverlay.propTypes = undefined
 
 
 const TrailInfoDetail = () => {
@@ -128,12 +140,17 @@ const TrailInfoDetail = () => {
                                 </div>
                                 <div className="mapContainer">
                                     <label className='mapLabel'>Coordinate: {`(${infoData.location.latitude}, ${infoData.location.longitude})`}</label>
-                                    <iframe
-                                        src={`https://leaflet-api.vercel.app/?center=${infoData.location.latitude},${infoData.location.longitude}&zoom=17&marker=Info%20Location%7C${infoData.location.latitude},${infoData.location.longitude}`}
-                                        width="100%"
-                                        height="400"
-                                        className='map'
-                                    />
+                                    <MapContainer center={[infoData.location.latitude, infoData.location.longitude]} zoom={17} className="map">
+                                        <TileLayer
+                                            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                        />
+                                        <Marker position={[infoData.location.latitude, infoData.location.longitude]} icon={myIcon}>
+                                            <Tooltip permanent>
+                                                Info Location
+                                            </Tooltip>
+                                        </Marker>
+                                    </MapContainer>
                                 </div>
                                 <div className="imageContainer">
                                     <label>Image: </label>
