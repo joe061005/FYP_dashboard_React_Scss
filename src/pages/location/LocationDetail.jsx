@@ -138,7 +138,7 @@ const LocationDetail = () => {
                                         />
                                         <Marker position={[locationData.coordinate.latitude, locationData.coordinate.longitude]} icon={myIcon}>
                                             <Tooltip permanent>
-                                                Info Location
+                                                User's Location
                                             </Tooltip>
                                         </Marker>
                                     </MapContainer>

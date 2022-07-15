@@ -76,7 +76,7 @@ const Featured = ({ data }) => {
           </div>
           <div className="item">
             <div className="itemTitle">Last Month</div>
-            <div className={`itemResult ${lastWeekNumber == 0 ? "noChange" : "positive"}`}>
+            <div className={`itemResult ${lastMonthNumber == 0 ? "noChange" : "positive"}`}>
               {lastMonthNumber == 0 ? <HorizontalRuleIcon /> : <KeyboardArrowUpOutlinedIcon font='small' />}
               {lastMonthNumber != 0 && <div className="resultAmount">{lastMonthNumber}</div>}
             </div>

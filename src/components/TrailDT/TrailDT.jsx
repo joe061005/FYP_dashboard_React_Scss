@@ -169,6 +169,19 @@ const TrailDT = ({ data }) => {
         },
 
         {
+            field: "info",
+            headerName: "Num of info",
+            type: 'string',
+            headerAlign: 'left',
+            width: 180,
+            renderCell: (params) => {
+                return (
+                    <p>{params.row.info.length}</p>
+                )
+            }
+        },
+
+        {
             field: "action",
             headerName: "Action",
             width: 200,
