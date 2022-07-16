@@ -7,6 +7,9 @@ import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import '../customUI/customUI.scss'
 import ReactJsAlert from "reactjs-alert"
+import API from '../../Api/Api';
+import LoadingOverlay from 'react-loading-overlay';
+LoadingOverlay.propTypes = undefined
 
 
 const DatatableUI = ({ data }) => {
@@ -16,15 +19,16 @@ const DatatableUI = ({ data }) => {
   const [filteredData, setFilteredData] = useState([])
   const [selectedRows, setSelectedRows] = useState([])
   const [showAlert, setShowAlert] = useState(false)
+  const [isLoadingDelete, setIsLoadingDelete] = useState(false)
 
-  const deleteUsersConfirm = () => {
+  const deleteUsersConfirm = (id) => {
     confirmAlert({
       customUI: ({ onClose }) => {
         return (
           <div className='custom-ui'>
             <h1>Are you sure?</h1>
-            <p>Do you want to delete the selected record(s)?</p>
-            <button onClick={() => { deleteUsers(); onClose() }}>Yes</button>
+            <p>{`Do you want to delete the selected record(s) ${id ? `(ID: ${id})` : `(Total: ${selectedRows.length})`}`}</p>
+            <button onClick={() => { id ? deleteUsers(id) : deleteUsers(); onClose() }}>Yes</button>
             <button onClick={() => { onClose() }}>No</button>
           </div>
         )
@@ -33,9 +37,45 @@ const DatatableUI = ({ data }) => {
 
   }
 
-  const deleteUsers = () => {
-    console.log("delete", selectedRows)
-    if (selectedRows.length == 0) return setShowAlert(true)
+  const deleteUsers = async (id) => {
+    console.log("deleteusers")
+
+    var params;
+
+    if (!id) {
+      if (selectedRows.length == 0) return setShowAlert(true)
+      params = {
+        userList: selectedRows
+      }
+    } else {
+      params = {
+        userList: [id]
+      }
+    }
+
+    setIsLoadingDelete(true)
+
+    await API.deleteUsers(params).then(([code, data, header]) => {
+      if (code == '401' || code == '500') {
+        console.log(data)
+      } else if (code == '200') {
+        var newList;
+        if (id) {
+          newList = filteredData.filter((row, index) => {
+            return row._id != id
+          })
+
+        } else {
+          newList = filteredData.filter((row, index) => {
+            return !selectedRows.includes(row._id)
+          })
+        }
+        setFilteredData(newList)
+        localStorage.setItem('userData', JSON.stringify(newList))
+      }
+    })
+
+    setIsLoadingDelete(false)
   }
 
   useEffect(() => {
@@ -105,13 +145,16 @@ const DatatableUI = ({ data }) => {
       }
     },
     {
-      field: "action", headerName: "Action", width: 200, renderCell: () => {
+      field: "action",
+      headerName: "Action",
+      width: 200,
+      renderCell: (params) => {
         return (
           <div className="cellAction">
-            <div className="viewButton">
+            <div className="viewButton" onClick={(e) => { e.stopPropagation(); navigate('/groups/groupDetail', { state: { groupData: params.row } }) }}>
               View
             </div>
-            <div className="deleteButton">
+            <div className="deleteButton" onClick={(e) => { e.stopPropagation(); deleteUsersConfirm(params.row._id) }}>
               Delete
             </div>
           </div>
@@ -122,38 +165,44 @@ const DatatableUI = ({ data }) => {
 
 
   return (
-    <div className="datatable">
-      <ReactJsAlert
-        status={showAlert}
-        type="error"
-        title="You must select at least one row!"
-        Close={() => setShowAlert(false)}
-      />
-      <div className="datatableTitle">
-        Add New User
-        <div className="link" onClick={() => { navigate("/users/addUser") }}>
-          Add New
+    <LoadingOverlay
+      active={isLoadingDelete}
+      spinner
+      text='Deleting...'
+    >
+      <div className="datatable">
+        <ReactJsAlert
+          status={showAlert}
+          type="error"
+          title="You must select at least one row!"
+          Close={() => setShowAlert(false)}
+        />
+        <div className="datatableTitle">
+          Add New User
+          <div className="link" onClick={() => { navigate("/users/addUser") }}>
+            Add New
+          </div>
         </div>
-      </div>
-      <div className="deleteSelectedButtonContainer" onClick={() => {
-        deleteUsersConfirm()
-      }}>
-        <DeleteIcon className='deleteButton' />
-        <p className="deleteText">Delete</p>
-      </div>
-      <DataGrid
-        className="datagrid"
-        rows={filteredData}
-        columns={userColumns}
-        getRowId={(row) => row._id}
-        checkboxSelection
-        pageSize={10}
-        rowsPerPageOptions={[10]}
-        pagination
-        onSelectionModelChange={(item) => { setSelectedRows(item) }}
-      />
+        <div className="deleteSelectedButtonContainer" onClick={() => {
+          deleteUsersConfirm()
+        }}>
+          <DeleteIcon className='deleteButton' />
+          <p className="deleteText">Delete</p>
+        </div>
+        <DataGrid
+          className="datagrid"
+          rows={filteredData}
+          columns={userColumns}
+          getRowId={(row) => row._id}
+          checkboxSelection
+          pageSize={10}
+          rowsPerPageOptions={[10]}
+          pagination
+          onSelectionModelChange={(item) => { setSelectedRows(item) }}
+        />
 
-    </div>
+      </div>
+    </LoadingOverlay>
   )
 }
 

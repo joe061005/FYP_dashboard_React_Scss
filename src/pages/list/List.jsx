@@ -6,12 +6,14 @@ import LoadingOverlay from 'react-loading-overlay';
 import ReactJsAlert from "reactjs-alert"
 import { UserContext } from '../../context/UserContext';
 import './list.scss'
-import API from '../../Api/Api'
 import ReactLoading from 'react-loading';
-import momentTz from 'moment-timezone'
+import { useNavigationType } from 'react-router-dom'
+import API from '../../Api/Api'
 LoadingOverlay.propTypes = undefined
 
 const List = () => {
+
+  const navigationType = useNavigationType();
 
   const { setShowAlert, isLogout, showAlert } = useContext(UserContext)
 
@@ -24,16 +26,23 @@ const List = () => {
         console.log(data)
       } else if (code == '200') {
         setUserData(data)
+        localStorage.setItem('userData', JSON.stringify(data))
         setIsLoading(false)
       }
     })
   }
 
   useEffect(() => {
-    getUserData()
+    console.log(navigationType)
+    if (navigationType != "POP") {
+      getUserData()
+    } else {
+      setUserData(JSON.parse(localStorage.getItem('userData')))
+      setIsLoading(false)
+    }
   }, [])
 
-  return(
+  return (
     <LoadingOverlay
       active={isLogout}
       spinner
