@@ -12,11 +12,10 @@ import ReactLoading from 'react-loading';
 import API from '../../Api/Api';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
-import SimpleImageSlider from "react-simple-image-slider";
 import { MapContainer, TileLayer, useMap, Marker, Popup, Tooltip, Polyline } from 'react-leaflet'
-import 'leaflet/dist/leaflet.css';
 import markerIconPng from "leaflet/dist/images/marker-icon.png"
 import { Icon } from 'leaflet'
+import useCollapse from 'react-collapsed';
 
 const myIcon = new Icon({
     iconUrl: markerIconPng,
@@ -33,6 +32,8 @@ const UserDetail = () => {
 
     const { state } = useLocation();
     const { userId } = state
+
+    const { getCollapseProps, getToggleProps, isExpanded } = useCollapse()
 
     const { setShowAlert, isLogout, showAlert } = useContext(UserContext)
 
@@ -162,71 +163,7 @@ const UserDetail = () => {
                                             <label>Confirmed:</label>
                                             <p className="datatext">{userDetail.user.confirmed ? "True" : "False"}</p>
                                         </div>
-                                        {/* <div className="formInput">
-                                            <label>Territory:</label>
-                                            <p className="datatext">{trailDetail.district}</p>
-                                        </div>
-                                        <div className="formInput">
-                                            <label>District:</label>
-                                            <p className="datatext">{trailDetail.place}</p>
-                                        </div>
-                                        <div className="formInput">
-                                            <label>Trail Name:</label>
-                                            <p className="datatext">{trailDetail.title}</p>
-                                        </div>
-                                        <div className="formInput">
-                                            <label>Description:</label>
-                                            <p className="datatext">{trailDetail.description}</p>
-                                        </div>
-                                        <div className="formInput">
-                                            <label>Distance (km):</label>
-                                            <p className="datatext">{trailDetail.distance}</p>
-                                        </div>
-                                        <div className="formInput">
-                                            <label>Difficulty (1-5 stars):</label>
-                                            <p className="datatext">{trailDetail.star.filter((star) => { return star == '1' }).length}</p>
-                                        </div>
-                                        <div className="formInput">
-                                            <label>Time:</label>
-                                            <p className="datatext">{trailDetail.time.split(".")[0] == '0' ?
-                                                `${trailDetail.time.split(".")[1]} minutes`
-                                                :
-                                                trailDetail.time.split(".")[1] == '0' ?
-                                                    `${trailDetail.time.split(".")[0]} hour(s)`
-                                                    :
-                                                    `${trailDetail.time.split(".")[0]} hour(s) and ${trailDetail.time.split(".")[1]} minutes`
-                                            }</p>
-                                        </div>
-                                        <div className="imageContainer">
-                                            <p>Images: </p>
-                                            <SimpleImageSlider
-                                                images={images}
-                                                showBullets={true}
-                                                showNavs={true}
-                                                width={'48%'}
-                                                height={500}
-                                                autoPlay={true}
-                                            />
-                                        </div>
-                                        <div className="mapContainer" style={{ zIndex: 0 }}>
-                                            <p>Map: </p>
-                                            <MapContainer center={[trailDetail.marker[0].latlong.latitude, trailDetail.marker[0].latlong.longitude]} zoom={15} className="map">
-                                                <TileLayer
-                                                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                                                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                                                />
-                                                {
-                                                    trailDetail.marker.map((marker, index) => (
-                                                        <Marker position={[marker.latlong.latitude, marker.latlong.longitude]} icon={myIcon} key={index}>
-                                                            <Tooltip permanent>
-                                                                {index == 0 ? `起點: ${marker.title}` : index == trailDetail.marker.length - 1 ? `終點: ${marker.title}` : `${marker.title}`}
-                                                            </Tooltip>
-                                                        </Marker>
-                                                    ))
-                                                }
-                                                <Polyline pathOptions={{ color: 'black' }} positions={path} />
-                                            </MapContainer>
-                                        </div> */}
+
                                         {isLoadingDelete ?
                                             <div className="loading">
                                                 <ReactLoading type="spin" color="#de4949" />
@@ -236,6 +173,82 @@ const UserDetail = () => {
                                         }
                                     </div>
                                 </div>
+                            </div>
+
+
+
+                            <div className="infoContainer">
+                                <div className="header" {...getToggleProps()}>
+                                    {isExpanded ? 'Hide Info details' : 'Expand Info details'}
+                                </div>
+                                <div {...getCollapseProps()}>
+                                    <div className="content">
+                                        {userDetail.info.length > 0 ?
+                                            userDetail.info.map((info, index) => (
+                                                <div className="bottom" key={info._id}>
+                                                    <div className="left">
+                                                        <img
+                                                            src="https://www.clipartmax.com/png/small/343-3432875_computer-icons-information-angle-logo-brand-nfl-atlanta-falcons-power-decal-light.png"
+                                                            alt=""
+                                                        />
+
+                                                    </div>
+                                                    <div className="right">
+                                                        <div className='detailContainer'>
+                                                            <div className="formInput">
+                                                                <label>Creation Time:</label>
+                                                                <p className="datatext">{info.timestamp}</p>
+                                                            </div>
+                                                            <div className="formInput">
+                                                                <label>Info ID:</label>
+                                                                <p className="datatext">{info._id}</p>
+                                                            </div>
+                                                            <div className="formInput">
+                                                                <label>District:</label>
+                                                                <p className="datatext">{info.district}</p>
+                                                            </div>
+                                                            <div className="formInput">
+                                                                <label>Trail:</label>
+                                                                <p className="datatext">{info.trail}</p>
+                                                            </div>
+                                                            <div className="formInput">
+                                                                <label>Info Type:</label>
+                                                                <p className="datatext">{info.type}</p>
+                                                            </div>
+                                                            <div className="formInput">
+                                                                <label>Description:</label>
+                                                                <p className="datatext">{info.description}</p>
+                                                            </div>
+                                                            <div className="mapContainer">
+                                                                <label className='mapLabel'>Coordinate: {`(${info.location.latitude}, ${info.location.longitude})`}</label>
+                                                                <iframe
+                                                                    src={`https://leaflet-api.vercel.app/?center=${info.location.latitude},${info.location.longitude}&zoom=18&marker=Info%20Location|${info.location.latitude},${info.location.longitude}`}
+                                                                    className="map"
+                                                                    allow='geolocation'
+
+                                                                />
+                                                            </div>
+                                                            <div className="imageContainer">
+                                                                <label>Image: </label>
+                                                                <img
+                                                                    src={info.image}
+                                                                    alt=""
+                                                                    width="100%"
+                                                                    height="100%"
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))
+
+                                            :
+
+                                            <p>This user didn't provide any info</p>
+                                        }
+                                    </div>
+                                </div>
+
                             </div>
                         </>
                     }

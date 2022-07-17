@@ -70,7 +70,7 @@
                     gap: 20px;
 
 
-                    .formInput {
+                    .formInput{
                         width: 40%;
 
                         p {
@@ -105,8 +105,19 @@
                         .map{
                             height: 400px;
                             width: 100%;
+                            border: none;
                         }
  
+                    }
+
+                    .imageContainer{
+                        width: 85%;
+                        height: 400px;
+                        margin-bottom: 40px;
+
+                        img {
+                            overflow: hidden;
+                        }
                     }
 
                     .loading{
@@ -133,6 +144,23 @@
 
                     }
                 }
+            }
+
+        }
+
+        .infoContainer{
+            
+            .header{
+                background-color: #03c6fc;
+                color: white;
+                padding: 5px;
+                margin: 20px;
+
+            }
+
+            .content{
+                margin-top: 10px;
+
             }
 
         }

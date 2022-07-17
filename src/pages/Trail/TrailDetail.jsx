@@ -16,7 +16,6 @@ import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import { useEffect } from 'react';
 import SimpleImageSlider from "react-simple-image-slider";
 import { MapContainer, TileLayer, useMap, Marker, Popup, Tooltip, Polyline } from 'react-leaflet'
-import 'leaflet/dist/leaflet.css';
 import markerIconPng from "leaflet/dist/images/marker-icon.png"
 import { Icon } from 'leaflet'
 import Chart from '../../components/chart/Chart';

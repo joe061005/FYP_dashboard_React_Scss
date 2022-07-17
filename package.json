@@ -19,6 +19,7 @@
     "moment-timezone": "^0.5.34",
     "react": "^18.1.0",
     "react-circular-progressbar": "^2.0.4",
+    "react-collapsed": "^3.3.2",
     "react-confirm-alert": "^3.0.2",
     "react-cookies": "^0.1.1",
     "react-dom": "^18.1.0",
