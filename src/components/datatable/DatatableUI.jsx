@@ -151,7 +151,7 @@ const DatatableUI = ({ data }) => {
       renderCell: (params) => {
         return (
           <div className="cellAction">
-            <div className="viewButton" onClick={(e) => { e.stopPropagation(); navigate('/groups/groupDetail', { state: { groupData: params.row } }) }}>
+            <div className="viewButton" onClick={(e) => { e.stopPropagation(); navigate('/users/userDetail', { state: { userId: params.row._id } }) }}>
               View
             </div>
             <div className="deleteButton" onClick={(e) => { e.stopPropagation(); deleteUsersConfirm(params.row._id) }}>
