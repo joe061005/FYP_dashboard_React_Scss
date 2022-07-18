@@ -95,6 +95,25 @@
                         }
                     }
 
+                    .GroupDetail {
+                        width: 90%;
+
+                        .groupMember {
+                            margin-top: 10px;
+                            width: 103%;
+                            padding: 5px;
+                            border-bottom: 1px solid gray;
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+                        }
+
+                        .deleteIcon{
+                            color: #de4949;
+                            cursor: pointer;
+                        }
+                    }
+
                     .mapContainer{
                         width: 85%;
 
@@ -112,7 +131,7 @@
 
                     .imageContainer{
                         width: 85%;
-                        height: 400px;
+                        height: 500px;
                         margin-bottom: 40px;
 
                         img {
@@ -148,7 +167,7 @@
 
         }
 
-        .infoContainer{
+        .expandListContainer{
             
             .header{
                 background-color: #03c6fc;
@@ -159,7 +178,14 @@
             }
 
             .content{
-                margin-top: 10px;
+
+                .number, .emptyText{
+                    margin-left: 20px;
+                }
+
+                .emptyText{
+                    margin-bottom: 20px;
+                }
 
             }
 

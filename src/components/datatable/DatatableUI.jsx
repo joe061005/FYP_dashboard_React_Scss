@@ -95,6 +95,13 @@ const DatatableUI = ({ data }) => {
       width: 180
     },
     {
+      field: "_id",
+      headerName: "user ID",
+      type: 'string',
+      headerAlign: 'left',
+      width: 250
+    },
+    {
       field: "username",
       headerName: "Username",
       type: 'string',
