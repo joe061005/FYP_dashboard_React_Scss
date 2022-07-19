@@ -127,7 +127,7 @@ const FormDetail = () => {
                                 </div>
                                 <div className="formInput">
                                     <label>User ID:</label>
-                                    <p className="datatext">{filteredData.user}</p>
+                                    <p className="datatext" onClick={()=> {navigate('/users/userDetail', { state: { userId: filteredData.user} }) }} style={{cursor: 'pointer', color:'#08a8ff'}}>{filteredData.user}</p>
                                 </div>
                                 <div className="formInput">
                                     <label>Name:</label>

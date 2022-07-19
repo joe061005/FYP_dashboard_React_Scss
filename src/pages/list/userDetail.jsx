@@ -283,7 +283,7 @@ const UserDetail = () => {
                                 </div>
                                 <div {...getFormCollapseProps()}>
                                     <div className="content">
-                                        {userDetail.form ?
+                                        {userDetail.form?
                                             (
                                                 <div className="bottom">
                                                     <div className="left">

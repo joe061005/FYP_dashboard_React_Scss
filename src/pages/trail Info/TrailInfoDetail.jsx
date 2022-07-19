@@ -109,7 +109,6 @@ const TrailInfoDetail = () => {
                                 src="https://www.clipartmax.com/png/small/343-3432875_computer-icons-information-angle-logo-brand-nfl-atlanta-falcons-power-decal-light.png"
                                 alt=""
                             />
-
                         </div>
                         <div className="right">
                             <div className='detailContainer'>
@@ -120,6 +119,14 @@ const TrailInfoDetail = () => {
                                 <div className="formInput">
                                     <label>Info ID:</label>
                                     <p className="datatext">{infoData._id}</p>
+                                </div>
+                                <div className="formInput">
+                                    <label>Provider ID:</label>
+                                    <p className="datatext" onClick={()=> {navigate('/users/userDetail', { state: { userId: infoData.userID} }) }} style={{cursor: 'pointer', color:'#08a8ff'}}>{infoData.userID}</p>
+                                </div>
+                                <div className="formInput">
+                                    <label>Trail ID:</label>
+                                    <p className="datatext" onClick={()=> {navigate('/trails/trailDetail', { state: { trailId: infoData.trailID} }) }} style={{cursor: 'pointer', color:'#08a8ff'}}>{infoData.trailID}</p>
                                 </div>
                                 <div className="formInput">
                                     <label>District:</label>

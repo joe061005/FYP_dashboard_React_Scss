@@ -93,6 +93,14 @@ const SessionDT = ({ data }) => {
 
         },
         {
+            field: "iden",
+            headerName: "User Type",
+            type: 'string',
+            headerAlign: 'left',
+            width: 250,
+
+        },
+        {
             field: "expires",
             headerName: "Expires",
             type: 'string',

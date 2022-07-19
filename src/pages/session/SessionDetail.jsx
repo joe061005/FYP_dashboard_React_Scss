@@ -116,7 +116,13 @@ const SessionDetail = () => {
                                 </div>
                                 <div className="formInput">
                                     <label>User ID:</label>
-                                    <p className="datatext">{sessionData.session.iden}</p>
+                                    {
+                                        sessionData.iden != "Admin"?
+                                        <p className="datatext" onClick={()=> {navigate('/users/userDetail', { state: { userId: sessionData.session.iden } }) }} style={{cursor: 'pointer', color:'#08a8ff'}}>{sessionData.session.iden}</p>
+                                        :
+                                        <p className="datatext">{sessionData.session.iden}</p>
+                                    }
+                               
                                 </div>
                                 <div className="formInput">
                                     <label>Max Age (ms):</label>

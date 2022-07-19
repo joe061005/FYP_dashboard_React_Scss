@@ -122,7 +122,7 @@ const LocationDetail = () => {
                                 </div>
                                 <div className="formInput">
                                     <label>User ID:</label>
-                                    <p className="datatext">{locationData.userID}</p>
+                                    <p className="datatext" onClick={()=> {navigate('/users/userDetail', { state: { userId: locationData.userID} }) }} style={{cursor: 'pointer', color:'#08a8ff'}}>{locationData.userID}</p>
                                 </div>
                                 <div className="formInput">
                                     <label>Date:</label>
