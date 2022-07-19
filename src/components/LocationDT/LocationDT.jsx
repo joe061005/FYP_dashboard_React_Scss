@@ -100,6 +100,14 @@ const LocationDT = ({ data }) => {
 
         },
         {
+            field: "_id",
+            headerName: "Location ID",
+            type: 'string',
+            headerAlign: 'left',
+            width: 250,
+
+        },
+        {
             field: "groupID",
             headerName: "Group ID",
             type: 'string',

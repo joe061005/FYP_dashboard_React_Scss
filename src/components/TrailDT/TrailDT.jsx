@@ -94,6 +94,13 @@ const TrailDT = ({ data }) => {
             width: 200,
         },
         {
+            field: "_id",
+            headerName: "Trail ID",
+            type: 'string',
+            headerAlign: 'left',
+            width: 250,
+        },
+        {
             field: "district",
             headerName: "Territory",
             type: 'string',

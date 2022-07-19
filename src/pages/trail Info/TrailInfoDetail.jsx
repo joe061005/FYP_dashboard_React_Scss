@@ -122,11 +122,16 @@ const TrailInfoDetail = () => {
                                 </div>
                                 <div className="formInput">
                                     <label>Provider ID:</label>
-                                    <p className="datatext" onClick={()=> {navigate('/users/userDetail', { state: { userId: infoData.userID} }) }} style={{cursor: 'pointer', color:'#08a8ff'}}>{infoData.userID}</p>
+                                    <p className="datatext" onClick={() => { navigate('/users/userDetail', { state: { userId: infoData.userID } }) }} style={{ cursor: 'pointer', color: '#08a8ff' }}>{infoData.userID}</p>
                                 </div>
                                 <div className="formInput">
                                     <label>Trail ID:</label>
-                                    <p className="datatext" onClick={()=> {navigate('/trails/trailDetail', { state: { trailId: infoData.trailID} }) }} style={{cursor: 'pointer', color:'#08a8ff'}}>{infoData.trailID}</p>
+                                    {
+                                        infoData.trailID ?
+                                            <p className="datatext" onClick={() => { navigate('/trails/trailDetail', { state: { trailId: infoData.trailID } }) }} style={{ cursor: 'pointer', color: '#08a8ff' }}>{infoData.trailID}</p>
+                                            :
+                                            <p className="datatext">No</p>
+                                    }
                                 </div>
                                 <div className="formInput">
                                     <label>District:</label>

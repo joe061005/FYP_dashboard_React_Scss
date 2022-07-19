@@ -198,7 +198,7 @@ const GroupDetail = () => {
                                         {filteredData.record.map((value, index) => {
                                             return (
                                                 <div className="groupMember" key={index}>
-                                                    <p className="datatext">{`${value.name}${value.phoneNumber ? ` (${value.phoneNumber})` : ""}  - ${value.age},${value.experience},${value.difficulty},${value.time},${value.view}`}</p>
+                                                    <p className="datatext" onClick={() => { navigate('/users/userDetail', { state: { userId: value.user } }) }} style={{ cursor: 'pointer', color: '#08a8ff' }}>{`${value.name}${value.phoneNumber ? ` (${value.phoneNumber})` : ""}  - ${value.age},${value.experience},${value.difficulty},${value.time},${value.view}`}</p>
                                                     <CancelIcon className='deleteIcon' onClick={() => { quitGroupConfirm(value.user); }} />
                                                 </div>
                                             )

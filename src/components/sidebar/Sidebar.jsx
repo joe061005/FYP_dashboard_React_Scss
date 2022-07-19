@@ -86,10 +86,6 @@ const Sidebar = () => {
         </ul>
 
       </div>
-      <div className="bottom">
-        <div className="colorOption" onClick={() => {setDark(false)}}/>
-        <div className="colorOption" onClick={() => {setDark(true)}}/>         
-      </div>
     </div>
   )
 }

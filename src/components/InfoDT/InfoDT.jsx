@@ -95,6 +95,14 @@ const InfoDT = ({ data }) => {
 
         },
         {
+            field: "_id",
+            headerName: "Info ID",
+            type: 'string',
+            headerAlign: 'left',
+            width: 250,
+
+        },
+        {
             field: "userID",
             headerName: "Provider ID",
             type: 'string',

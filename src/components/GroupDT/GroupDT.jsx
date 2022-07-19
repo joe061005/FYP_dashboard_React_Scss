@@ -100,6 +100,15 @@ const GroupDT = ({ data }) => {
         },
 
         {
+            field: "_id",
+            headerName: "Group ID",
+            type: 'string',
+            headerAlign: 'left',
+            width: 250,
+
+        },
+
+        {
             field: "startTime",
             headerName: "Start Time",
             type: 'string',

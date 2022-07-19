@@ -89,7 +89,15 @@ const SessionDT = ({ data }) => {
             headerName: "Last Active time",
             type: 'string',
             headerAlign: 'left',
-            width: 250,
+            width: 200,
+
+        },
+        {
+            field: "_id",
+            headerName: "Session ID",
+            type: 'string',
+            headerAlign: 'left',
+            width: 350,
 
         },
         {
@@ -97,7 +105,7 @@ const SessionDT = ({ data }) => {
             headerName: "User Type",
             type: 'string',
             headerAlign: 'left',
-            width: 250,
+            width: 150,
 
         },
         {

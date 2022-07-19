@@ -156,6 +156,10 @@ const TrailDetail = () => {
                                             <p className="datatext">{trailDetail.timestamp}</p>
                                         </div>
                                         <div className="formInput">
+                                            <label>Trail ID:</label>
+                                            <p className="datatext">{trailDetail._id}</p>
+                                        </div>
+                                        <div className="formInput">
                                             <label>Territory:</label>
                                             <p className="datatext">{trailDetail.district}</p>
                                         </div>

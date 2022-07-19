@@ -27,9 +27,6 @@ const Navbar = (props) => {
             <LanguageOutlinedIcon className='logo' />
             English
           </div>
-          <div className="item" onClick={() => {setDark(prevState => !prevState)}}>
-            <DarkModeOutlinedIcon className='logo'/>
-          </div>
           <div className="item">
             <FullscreenOutlinedIcon className='logo'/>
           </div>

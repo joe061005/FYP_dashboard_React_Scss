@@ -121,6 +121,14 @@ const FormDT = ({ data }) => {
 
         },
         {
+            field: "_id",
+            headerName: "Form ID",
+            type: 'string',
+            headerAlign: 'left',
+            width: 250,
+
+        },
+        {
             field: "user",
             headerName: "User ID",
             type: 'string',

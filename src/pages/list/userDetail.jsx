@@ -396,7 +396,7 @@ const UserDetail = () => {
                                                                 <label>Group Member (Phone Number):</label>
                                                                 {userDetail.group.record.map((value, index) => {
                                                                     return (
-                                                                        <div className="groupMember" key={index}>
+                                                                        <div className="groupMember" key={index} style={{background: value.user == userId?  '#03fcf0' : ''}}>
                                                                             <p className="datatext">{`${value.name}${value.phoneNumber ? ` (${value.phoneNumber})` : ""}  - ${value.age},${value.experience},${value.difficulty},${value.time},${value.view}`}</p>
                                                                         </div>
                                                                     )
