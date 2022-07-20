@@ -20,6 +20,7 @@ import markerIconPng from "leaflet/dist/images/marker-icon.png"
 import { Icon } from 'leaflet'
 import Chart from '../../components/chart/Chart';
 import TransportDT from '../../components/TransportDT/TransportDT';
+import useCollapse from 'react-collapsed';
 
 const myIcon = new Icon({
     iconUrl: markerIconPng,
@@ -45,6 +46,10 @@ const TrailDetail = () => {
     const [trailDetail, setTrailDetail] = useState([])
     const [images, setImages] = useState([])
     const [path, setPath] = useState([])
+
+    const [isInfoExpanded, setInfoExpanded] = useState(false)
+    const infoCollapse = useCollapse({ isInfoExpanded })
+    const [getInfoCollapseProps, getInfoToggleProps] = [infoCollapse.getCollapseProps, infoCollapse.getToggleProps]
 
     const deleteTrailsConfirm = (id) => {
         console.log("called", id)
@@ -244,6 +249,97 @@ const TrailDetail = () => {
                                         }
                                     </div>
                                 </div>
+                            </div>
+                            <div className="expandListContainer">
+                                <div className="header" {...getInfoToggleProps({
+                                    onClick: () => setInfoExpanded((prev) => !prev)
+                                })}>
+                                    {isInfoExpanded ? 'Hide Info Details' : `Expand Info Details (Total: ${trailDetail.info.length})`}
+                                </div>
+                                <div {...getInfoCollapseProps()}>
+                                    <div className="content">
+                                        {trailDetail.info.length > 0 ?
+                                            trailDetail.info.map((info, index) => (
+                                                <div key={info._id}>
+                                                    <p className='number'>Info {index + 1}:</p>
+                                                    <div className="bottom">
+                                                        <div className="left">
+                                                            <img
+                                                                src="https://www.clipartmax.com/png/small/343-3432875_computer-icons-information-angle-logo-brand-nfl-atlanta-falcons-power-decal-light.png"
+                                                                alt=""
+                                                            />
+
+                                                        </div>
+                                                        <div className="right">
+                                                            <div className='detailContainer'>
+                                                                <div className="formInput">
+                                                                    <label>Creation Time:</label>
+                                                                    <p className="datatext">{info.timestamp}</p>
+                                                                </div>
+                                                                <div className="formInput">
+                                                                    <label>Info ID:</label>
+                                                                    <p className="datatext">{info._id}</p>
+                                                                </div>
+                                                                <div className="formInput">
+                                                                    <label>Provider ID:</label>
+                                                                    <p className="datatext" onClick={() => { navigate('/users/userDetail', { state: { userId: info.userID } }) }} style={{ cursor: 'pointer', color: '#08a8ff' }}>{info.userID}</p>
+                                                                </div>
+                                                                <div className="formInput">
+                                                                    <label>Trail ID:</label>
+                                                                    {
+                                                                        info.trailID ?
+                                                                            <p className="datatext">{info.trailID}</p>
+                                                                            :
+                                                                            <p className="datatext">No</p>
+                                                                    }
+                                                                </div>
+                                                                <div className="formInput">
+                                                                    <label>District:</label>
+                                                                    <p className="datatext">{info.district}</p>
+                                                                </div>
+                                                                <div className="formInput">
+                                                                    <label>Trail:</label>
+                                                                    <p className="datatext">{info.trail}</p>
+                                                                </div>
+                                                                <div className="formInput">
+                                                                    <label>Info Type:</label>
+                                                                    <p className="datatext">{info.type}</p>
+                                                                </div>
+                                                                <div className="formInput">
+                                                                    <label>Description:</label>
+                                                                    <p className="datatext">{info.description}</p>
+                                                                </div>
+                                                                <div className="mapContainer">
+                                                                    <label className='mapLabel'>Coordinate: {`(${info.location.latitude}, ${info.location.longitude})`}</label>
+                                                                    <iframe
+                                                                        src={`https://leaflet-api.vercel.app/?center=${info.location.latitude},${info.location.longitude}&zoom=18&marker=Info%20Location|${info.location.latitude},${info.location.longitude}`}
+                                                                        className="map"
+                                                                        allow='geolocation'
+
+                                                                    />
+                                                                </div>
+                                                                <div className="imageContainer">
+                                                                    <label>Image: </label>
+                                                                    <img
+                                                                        src={info.image}
+                                                                        alt=""
+                                                                        width="100%"
+                                                                        height="100%"
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))
+
+                                            :
+
+                                            <p className='emptyText'>This trail didn't have any info</p>
+                                        }
+                                    </div>
+                                </div>
+
                             </div>
                         </>
                     }

@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext, useEffect, useReducer } from 'react'
 import Navbar from '../../components/navbar/Navbar'
 import Sidebar from '../../components/sidebar/Sidebar'
 import LoadingOverlay from 'react-loading-overlay';
@@ -35,7 +35,6 @@ const UserDetail = () => {
     const { userId } = state
 
     const { setShowAlert, isLogout, showAlert } = useContext(UserContext)
-
 
     const [isLoadingDelete, setIsLoadingDelete] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
@@ -117,8 +116,10 @@ const UserDetail = () => {
     }
 
     useEffect(() => {
+        setIsLoading(true)
         getUserDetail()
-    }, [])
+    }, [userId])
+
 
 
 
@@ -228,6 +229,19 @@ const UserDetail = () => {
                                                                     <p className="datatext">{info._id}</p>
                                                                 </div>
                                                                 <div className="formInput">
+                                                                    <label>Provider ID:</label>
+                                                                    <p className="datatext">{info.userID}</p>
+                                                                </div>
+                                                                <div className="formInput">
+                                                                    <label>Trail ID:</label>
+                                                                    {
+                                                                        info.trailID ?
+                                                                            <p className="datatext" onClick={() => { navigate('/trails/trailDetail', { state: { trailId: info.trailID } }) }} style={{ cursor: 'pointer', color: '#08a8ff' }}>{info.trailID}</p>
+                                                                            :
+                                                                            <p className="datatext">No</p>
+                                                                    }
+                                                                </div>
+                                                                <div className="formInput">
                                                                     <label>District:</label>
                                                                     <p className="datatext">{info.district}</p>
                                                                 </div>
@@ -283,7 +297,7 @@ const UserDetail = () => {
                                 </div>
                                 <div {...getFormCollapseProps()}>
                                     <div className="content">
-                                        {userDetail.form?
+                                        {userDetail.form ?
                                             (
                                                 <div className="bottom">
                                                     <div className="left">
@@ -396,8 +410,17 @@ const UserDetail = () => {
                                                                 <label>Group Member (Phone Number):</label>
                                                                 {userDetail.group.record.map((value, index) => {
                                                                     return (
-                                                                        <div className="groupMember" key={index} style={{background: value.user == userId?  '#03fcf0' : ''}}>
-                                                                            <p className="datatext">{`${value.name}${value.phoneNumber ? ` (${value.phoneNumber})` : ""}  - ${value.age},${value.experience},${value.difficulty},${value.time},${value.view}`}</p>
+                                                                        <div className="groupMember" key={index} style={{ background: value.user == userId ? '#03fcf0' : '' }}>
+                                                                            <p className="datatext"
+                                                                                onClick={() => {
+                                                                                    if (value.user != userId) {
+                                                                                        navigate('/users/userDetail', { state: { userId: value.user } })
+                                                                                    }
+                                                                                }}
+                                                                                style={{ cursor: value.user == userId ? '' : 'pointer', color: value.user == userId ? '' : '#08a8ff' }}
+                                                                            >
+                                                                                {`${value.name}${value.phoneNumber ? ` (${value.phoneNumber})` : ""}  - ${value.age},${value.experience},${value.difficulty},${value.time},${value.view}`}
+                                                                            </p>
                                                                         </div>
                                                                     )
                                                                 })}
