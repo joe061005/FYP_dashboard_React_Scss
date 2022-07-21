@@ -2,7 +2,7 @@
 //import moment from 'moment'
 
 const api_path = {
-    baseURL: 'https://5407-223-19-143-35.ngrok.io/'
+    baseURL: 'https://24f0-223-19-143-35.ngrok.io/'
 }
 
 //let date = moment().format('YYYY-MM-DD');
@@ -56,6 +56,15 @@ var api = {
     deleteUsers: (props) => {
         var request = {
             method: 'admin/deleteUsers',
+            params: props
+        }
+
+        return post(request)
+    },
+
+    register: (props) => {
+        var request = {
+            method: 'user/addUser',
             params: props
         }
 

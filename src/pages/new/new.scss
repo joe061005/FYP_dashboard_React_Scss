@@ -9,7 +9,7 @@
     .newContainer {
         flex: 4;
 
-        .top{
+        .top {
 
             margin: 20px;
             display: flex;
@@ -32,8 +32,8 @@
             }
 
             h1 {
-                color: lightgray;
-                font-size: 20px;
+                color: black;
+                font-size: 30px;
                 text-align: center;
                 width: 70%;
 
@@ -67,42 +67,68 @@
             .right {
                 flex: 2;
 
-                form {
-                    display: flex;
-                    flex-wrap: wrap;
-                    gap: 20px;
+
+                display: flex;
+                flex-wrap: wrap;
+                gap: 20px;
 
 
-                    .formInput {
-                        width: 40%;
+                .formInput {
+                    width: 40%;
 
-                        input {
-                            width: 100%;
-                            padding: 5px;
+                    .passwordInputContainer{
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        border-bottom: 1px solid gray;
+                        width: 104%;
+
+                        .passwordInput{
+                            width: 90%;
+                           
                             border: none;
-                            border-bottom: 1px solid gray;
                             outline: none;
+
                         }
                     }
 
-                    button {
-                        width: 85%;
-                        padding: 10px;
+                    input {
+                        width: 100%;
+                        padding: 5px;
                         border: none;
-                        background-color: teal;
-                        color: white;
-                        font-weight: bold;
-                        cursor: pointer;
-                        border-radius: 5px;
-                        margin-top: 10px;
-
+                        border-bottom: 1px solid gray;
+                        outline: none;
                     }
                 }
+
+                .loading{
+                    width: 90%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin-top: 20px;
+                    margin-bottom: 20px;
+
+                }
+
+                button {
+                    width: 85%;
+                    padding: 10px;
+                    border: none;
+                    background-color: teal;
+                    color: white;
+                    font-weight: bold;
+                    cursor: pointer;
+                    border-radius: 5px;
+                    margin-top: 10px;
+
+                }
+
             }
 
         }
 
-        .bottom{
+        .bottom {
             height: 50%;
         }
 
