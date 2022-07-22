@@ -24,6 +24,7 @@ import FormDetail from "./pages/form/FormDetail"
 import TrailInfoDetail from "./pages/trail Info/TrailInfoDetail";
 import TrailDetail from './pages/Trail/TrailDetail'
 import UserDetail from './pages/list/userDetail'
+import NewTrail from './pages/newTrail/NewTrail'
 
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
             <Route path="trails">
               <Route index element={<Trail />} />
               <Route path="trailDetail" element={<TrailDetail />} />
+              <Route path="addTrail" element={<NewTrail />} />
             </Route>
             <Route path="trailInfo">
               <Route index element={<TrailInfo />} />

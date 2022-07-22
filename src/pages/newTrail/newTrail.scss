@@ -1,4 +1,4 @@
-.new {
+.newTrail {
     display: flex;
     width: 100%;
 
@@ -6,7 +6,7 @@
         flex: 1
     }
 
-    .newContainer {
+    .newTrailContainer {
         flex: 4;
 
         .top {
@@ -43,7 +43,7 @@
         .bottom {
             -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
             box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
-            padding: 10px;
+            padding: 30px;
             margin: 20px;
             display: flex;
             gap: 20px;
@@ -66,8 +66,6 @@
 
             .right {
                 flex: 2;
-
-
                 display: flex;
                 flex-wrap: wrap;
                 gap: 20px;
@@ -76,16 +74,16 @@
                 .formInput {
                     width: 40%;
 
-                    .passwordInputContainer{
+                    .passwordInputContainer {
                         display: flex;
                         align-items: center;
                         justify-content: space-between;
                         border-bottom: 1px solid gray;
                         width: 104%;
 
-                        .passwordInput{
+                        .passwordInput {
                             width: 90%;
-                           
+
                             border: none;
                             outline: none;
 
@@ -93,16 +91,36 @@
                     }
 
                     input {
+
+                        &.sameHeight {
+                            height: 30px;
+                        }
+
                         width: 100%;
                         padding: 5px;
                         border: none;
                         border-bottom: 1px solid gray;
-                        outline: none;
                         font-size: 16px;
+
                     }
                 }
 
-                .loading{
+                .textAreaContainer {
+                    width: 80%;
+
+                    .textArea {
+                        width: 100%;
+                        height: 150px;
+                        outline: none;
+                        border-radius: 10px;
+                        padding: 10px;
+                        font-size: 16px;
+                        resize: none;
+                        margin-top: 10px;
+                    }
+                }
+
+                .loading {
                     width: 90%;
                     display: flex;
                     justify-content: center;
@@ -123,15 +141,13 @@
                     border-radius: 5px;
                     margin-top: 10px;
 
+
                 }
 
             }
 
         }
 
-        .bottom {
-            height: 50%;
-        }
 
     }
 

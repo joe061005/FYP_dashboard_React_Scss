@@ -221,6 +221,12 @@ const TrailDT = ({ data }) => {
                     title="You must select at least one row!"
                     Close={() => setShowAlert(false)}
                 />
+                <div className="datatableTitle">
+                    Add New Trail
+                    <div className="link" onClick={() => { navigate("/trails/addTrail") }}>
+                        Add New
+                    </div>
+                </div>
                 <div className="deleteSelectedButtonContainer" onClick={() => {
                     deleteTrailsConfirm()
                 }}>
