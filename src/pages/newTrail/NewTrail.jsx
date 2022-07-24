@@ -45,6 +45,53 @@ const NewTrail = () => {
     const [isLoadingCreate, setIsLoadingCreate] = useState(false)
     const [showInvalidInput, setShowInvalidInput] = useState(false)
 
+    const test = async () => {
+        // console.log(String.fromCharCode("\u7530"))
+
+        var pathArr = path.replaceAll('[', '').replaceAll(']', ' ').split(' , ')
+        pathArr = pathArr.map((path) => {
+            path = path.trim().split(', ')
+            return { latitude: path[0], longitude: path[1] }
+        })
+
+        var xlabelArr = xlabel.replaceAll('[', '').replaceAll(']', '').split(', ')
+        xlabelArr = xlabelArr.map((x) => {
+            return parseFloat(x)
+        })
+
+        var ylabelArr = ylabel.replaceAll('[', '').replaceAll(']', '').split(', ')
+        ylabelArr = ylabelArr.map((y) => {
+            return parseFloat(y)
+        })
+
+        const imageArr = image.split('\n')
+
+        // var markerArr = JSON.parse(marker.replace(/\s/g, ''))
+
+        //   markerArr = markerArr.map((marker) => {
+        //     return {latlong: {latitude: marker.lat, longitude: marker.lon}, title: marker.name}
+        //   })
+
+
+        // var startArr = trafficStart.split('\n')
+
+        // startArr = startArr.map((startObj) => {
+        //     const arr = startObj.split("\t")
+        //     return { number: arr[0], route: arr[1], destination: arr[2], remark: arr[3].replace(/\s/g, '') }
+        // })
+
+        // var endArr = trafficEnd.split('\n')
+
+        // endArr = endArr.map((endObj) => {
+        //     const arr = endObj.split("\t")
+        //     return { number: arr[0], route: arr[1], destination: arr[2], remark: arr[3].replace(/\s/g, '') }
+        // })
+
+        console.log(imageArr);
+
+
+    }
+
     const submit = async () => {
         if (!isValidFormInput()) return;
 
@@ -151,7 +198,7 @@ const NewTrail = () => {
                                     placeholder='Trail Name'
                                     value={title}
                                     onChange={(e) => { setTitle(e.target.value) }}
-            
+
                                 />
                             </div>
                             <div className="formInput">
@@ -173,7 +220,7 @@ const NewTrail = () => {
                                 />
                             </div>
                             <div className="formInput">
-                                <label>Time (hours)</label>
+                                <label>Time (hour.minute)</label>
                                 <input
                                     type="text"
                                     placeholder='Time'
@@ -182,7 +229,7 @@ const NewTrail = () => {
                                 />
                             </div>
                             <div className="textAreaContainer">
-                                <label>Image URLs</label>
+                                <label>Image URLs (URL \n ...)</label>
                                 <textarea
                                     value={image}
                                     onChange={(e) => { setImage(e.target.value) }}
@@ -190,15 +237,15 @@ const NewTrail = () => {
                                 />
                             </div>
                             <div className="textAreaContainer">
-                                <label>Markers</label>
+                                <label>Paths [lat, long], ...</label>
                                 <textarea
-                                    value={marker}
-                                    onChange={(e) => { setMarker(e.target.value) }}
+                                    value={path}
+                                    onChange={(e) => { setPath(e.target.value) }}
                                     className="textArea"
                                 />
                             </div>
                             <div className="textAreaContainer">
-                                <label>X Labels</label>
+                                <label>X Labels [..., ...]</label>
                                 <textarea
                                     value={xlabel}
                                     onChange={(e) => { setXlabel(e.target.value) }}
@@ -206,7 +253,7 @@ const NewTrail = () => {
                                 />
                             </div>
                             <div className="textAreaContainer">
-                                <label>Y Labels</label>
+                                <label>Y Labels [..., ...]</label>
                                 <textarea
                                     value={ylabel}
                                     onChange={(e) => { setYlabel(e.target.value) }}
@@ -214,10 +261,10 @@ const NewTrail = () => {
                                 />
                             </div>
                             <div className="textAreaContainer">
-                                <label>Paths</label>
+                                <label>Markers {`[{"lat": xx, ...}]`}</label>
                                 <textarea
-                                    value={path}
-                                    onChange={(e) => { setPath(e.target.value) }}
+                                    value={marker}
+                                    onChange={(e) => { setMarker(e.target.value) }}
                                     className="textArea"
                                 />
                             </div>
@@ -230,7 +277,7 @@ const NewTrail = () => {
                                 />
                             </div>
                             <div className="textAreaContainer">
-                                <label>Traffic info at starting point</label>
+                                <label>Traffic info at starting point (number route destination remark \n ...)</label>
                                 <textarea
                                     value={trafficStart}
                                     onChange={(e) => { setTrafficStart(e.target.value) }}
@@ -238,7 +285,7 @@ const NewTrail = () => {
                                 />
                             </div>
                             <div className="textAreaContainer">
-                                <label>Traffic info at ending point</label>
+                                <label>Traffic info at ending point (number route destination remark \n ...)</label>
                                 <textarea
                                     value={trafficEnd}
                                     onChange={(e) => { setTrafficEnd(e.target.value) }}
@@ -251,11 +298,11 @@ const NewTrail = () => {
                                     <ReactLoading type="spin" color="teal" />
                                 </div>
                                 :
-                                <button onClick={() => { submit() }}>Create</button>
+                                <button onClick={() => { test() }}>Create</button>
                             }
                         </div>
                     </div>
-                </div>                                                                                  
+                </div>
             </div>
         </LoadingOverlay>
     )
