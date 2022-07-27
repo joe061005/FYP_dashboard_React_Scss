@@ -23,9 +23,9 @@ const TransportDT = ({ data }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.map((row) => (
+            {data.map((row, index) => (
               <TableRow
-                key={row._id}
+                key={row._id? row._id: index}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
                 <TableCell component="th" scope="row">

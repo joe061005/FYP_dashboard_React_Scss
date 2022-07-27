@@ -50,6 +50,7 @@
             align-items: center;
 
 
+
             .left {
                 flex: 1;
                 display: flex;
@@ -79,77 +80,67 @@
                         align-items: center;
                         justify-content: space-between;
                         border-bottom: 1px solid gray;
-                        width: 104%;
-
-                        .passwordInput {
-                            width: 90%;
-
-                            border: none;
-                            outline: none;
-
-                        }
                     }
-
-                    input {
-
-                        &.sameHeight {
-                            height: 30px;
-                        }
-
-                        width: 100%;
-                        padding: 5px;
-                        border: none;
-                        border-bottom: 1px solid gray;
-                        font-size: 16px;
-
-                    }
-                }
-
-                .textAreaContainer {
-                    width: 80%;
-
-                    .textArea {
-                        width: 100%;
-                        height: 150px;
-                        outline: none;
-                        border-radius: 10px;
-                        padding: 10px;
-                        font-size: 16px;
-                        resize: none;
-                        margin-top: 10px;
-                    }
-                }
-
-                .loading {
-                    width: 90%;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    margin-top: 20px;
-                    margin-bottom: 20px;
 
                 }
 
-                button {
-                    width: 85%;
-                    padding: 10px;
+                input {
+
+                    &.sameHeight {
+                        height: 30px;
+                    }
+
+                    width: 100%;
+                    font-size: 16px;
                     border: none;
-                    background-color: teal;
-                    color: white;
-                    font-weight: bold;
-                    cursor: pointer;
-                    border-radius: 5px;
-                    margin-top: 10px;
+                    border-bottom: 1px solid gray;
+                    outline: none;
+                    padding: 5px;
 
+                }
+            }
+
+            .textAreaContainer {
+                width: 80%;
+
+                .textArea {
+                    width: 100%;
+                    height: 300px;
+                    resize: none;
+                    border-radius: 10px;
+                    margin-top: 10px;
+                    padding: 10px;
+                    font-size: 16px;
+                    outline: none;
 
                 }
 
             }
+        }
+
+        .loading {
+            width: 90%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
 
         }
 
+        button {
+            width: 85%;
+            padding: 10px;
+            border: none;
+            background-color: teal;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+
+        }
 
     }
-
 
 }
