@@ -2,7 +2,7 @@
 //import moment from 'moment'
 
 const api_path = {
-    baseURL: 'https://1fea-223-19-143-35.ngrok.io/'
+    baseURL: 'https://2a83-223-19-143-35.ngrok.io/'
 }
 
 //let date = moment().format('YYYY-MM-DD');
@@ -91,6 +91,15 @@ var api = {
     deleteTrails: (props) => {
         var request = {
             method: 'admin/deleteTrails',
+            params: props
+        }
+
+        return post(request)
+    },
+
+    createTrail: (props) => {
+        var request = {
+            method: 'admin/addTrail',
             params: props
         }
 
