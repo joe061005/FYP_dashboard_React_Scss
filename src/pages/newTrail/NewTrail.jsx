@@ -480,11 +480,11 @@ const NewTrail = () => {
                             </div>
                             <div style={{ width: '60%' }}>
                                 <p style={{ marginBottom: 10 }}>Transportation at the starting point:</p>
-                                <TransportDT data={tempTrailObj.trafficStart} />
+                                <TransportDT data={tempTrailObj.trafficStart} type="start"/>
                             </div>
                             <div style={{ width: '60%' }}>
                                 <p style={{ marginBottom: 10 }}>Transportation at the ending point:</p>
-                                <TransportDT data={tempTrailObj.trafficEnd} />
+                                <TransportDT data={tempTrailObj.trafficEnd} type="end"/>
                             </div>
 
                             {isLoadingCreate ?

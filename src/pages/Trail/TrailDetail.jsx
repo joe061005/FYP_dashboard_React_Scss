@@ -221,7 +221,7 @@ const TrailDetail = () => {
                                                     trailDetail.marker.map((marker, index) => (
                                                         <Marker position={[marker.latlong.latitude, marker.latlong.longitude]} icon={myIcon} key={index}>
                                                             <Tooltip permanent>
-                                                                {index == 0 ? `起點: ${marker.title}` : index == trailDetail.marker.length - 1 ? `終點: ${marker.title}` : `${marker.title}`}
+                                                                {index == 0 ? `起點${marker.title? `: ${marker.title}` : ""}` : index == trailDetail.marker.length - 1 ? `終點${marker.title? `: ${marker.title}`: ""}` : `${marker.title}`}
                                                             </Tooltip>
                                                         </Marker>
                                                     ))
@@ -234,11 +234,11 @@ const TrailDetail = () => {
                                         </div>
                                         <div className="transportChartContainer">
                                             <p>Transportation at the starting point:</p>
-                                            <TransportDT data={trailDetail.trafficStart} />
+                                            <TransportDT data={trailDetail.trafficStart} type="start"/>
                                         </div>
                                         <div className="transportChartContainer">
                                             <p>Transportation at the ending point:</p>
-                                            <TransportDT data={trailDetail.trafficEnd} />
+                                            <TransportDT data={trailDetail.trafficEnd}  type = "end"/>
                                         </div>
                                         {isLoadingDelete ?
                                             <div className="loading">

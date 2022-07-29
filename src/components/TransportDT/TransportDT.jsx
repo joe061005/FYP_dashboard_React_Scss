@@ -9,7 +9,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
 
-const TransportDT = ({ data }) => {
+const TransportDT = ({ data, type }) => {
 
     return (
         <TableContainer component={Paper}>
@@ -18,7 +18,7 @@ const TransportDT = ({ data }) => {
             <TableRow>
               <TableCell>Route Number</TableCell>
               <TableCell>Route</TableCell>
-              <TableCell>Destination</TableCell>
+              <TableCell>{type == "start" ? "Destination" : "Start"}</TableCell>
               <TableCell>Remark</TableCell>
             </TableRow>
           </TableHead>
