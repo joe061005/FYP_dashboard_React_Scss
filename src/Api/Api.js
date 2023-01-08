@@ -2,7 +2,7 @@
 //import moment from 'moment'
 
 const api_path = {
-    baseURL: 'https://bdc7-175-159-182-179.ngrok.io/'
+    baseURL: 'http://localhost:3001/'
 }
 
 //let date = moment().format('YYYY-MM-DD');
