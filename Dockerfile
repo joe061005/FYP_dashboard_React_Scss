@@ -1,5 +1,5 @@
 # node runtime + base Linux image
-FROM node:latest
+FROM node:16
 # create a new directory
 RUN mkdir -p /app/src
 # set the new directory as the working directory
