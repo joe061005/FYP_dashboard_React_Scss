@@ -2,7 +2,7 @@
 //import moment from 'moment'
 
 const api_path = {
-    baseURL: 'http://localhost:3001/'
+    baseURL: 'https://hiking-app-backend.azurewebsites.net/'
 }
 
 //let date = moment().format('YYYY-MM-DD');
@@ -263,4 +263,4 @@ async function put(request) {
 }
 
 
-module.exports = api;
+export default api;
