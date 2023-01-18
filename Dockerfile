@@ -1,36 +1,43 @@
 # Stage 1
 # Build docker image of react app
 FROM node:16 as build-stage
-# set working directory
-RUN mkdir /usr/app
-# copy all files from current directory to docker
-COPY . /usr/app
+# # set working directory
+# RUN mkdir /usr/app
+# # copy all files from current directory to docker
+# COPY . /usr/app
 
-WORKDIR /usr/app
+# WORKDIR /usr/app
+WORKDIR /app
+
+COPY . ./
 
 # install and cache app dependencies
 RUN yarn
+RUN yarn build
 
-# add `/usr/src/app/node_modules/.bin` to $PATH
-ENV PATH /usr/src/app/node_modules/.bin:$PATH
+# # add `/usr/src/app/node_modules/.bin` to $PATH
+# ENV PATH /usr/src/app/node_modules/.bin:$PATH
 
-RUN npm run build
+# RUN npm run build
 
 # Stage 2
 # Copy the react app build above in nginx
 FROM nginx:alpine
 
-# set working directory to nginx asset directory
-WORKDIR /usr/share/nginx/html
+# # Remove default nginx static assets
+# RUN rm -rf /usr/share/nginx/html/*
 
-# Remove default nginx static assets
-RUN rm -rf ./*
+# Copy nginx conf file
+# COPY nginx.conf /usr/etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Copy static assets from builder stage
-COPY --from=build-stage /usr/app/build .
+# COPY --from=build-stage /usr/app/build /usr/share/nginx/html
+COPY --from=build-stage /app/build /usr/share/nginx/html
 
+EXPOSE 80
 # Containers run nginx with global directives and daemon off 
-# daemon off: let nginx stay in the foreground so that Docker can track the process properly
+# daemon o ff: let nginx stay in the foreground so that Docker can track the process properly
 CMD ["nginx", "-g", "daemon off;"]
 
 # # node runtime + base Linux image
