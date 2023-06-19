@@ -259,12 +259,17 @@ const UserDetail = () => {
                                                                 </div>
                                                                 <div className="mapContainer">
                                                                     <label className='mapLabel'>Coordinate: {`(${info.location.latitude}, ${info.location.longitude})`}</label>
-                                                                    <iframe
-                                                                        src={`https://leaflet-api.vercel.app/?center=${info.location.latitude},${info.location.longitude}&zoom=18&marker=Info%20Location|${info.location.latitude},${info.location.longitude}`}
-                                                                        className="map"
-                                                                        allow='geolocation'
-
-                                                                    />
+                                                                    <MapContainer center={[info.location.latitude, info.location.longitude]} zoom={17} className="map">
+                                                                        <TileLayer
+                                                                            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                                                                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                                                        />
+                                                                        <Marker position={[info.location.latitude, info.location.longitude]} icon={myIcon}>
+                                                                            <Tooltip permanent>
+                                                                                Info Location
+                                                                            </Tooltip>
+                                                                        </Marker>
+                                                                    </MapContainer>
                                                                 </div>
                                                                 <div className="imageContainer">
                                                                     <label>Image: </label>

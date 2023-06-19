@@ -9,7 +9,7 @@ WORKDIR /app
 COPY . ./
 
 # install and cache app dependencies
-RUN yarn
+RUN yarn install --network-timeout=30000
 
 # build the app
 RUN yarn build
